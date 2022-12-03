@@ -7,6 +7,46 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <title>Title</title>
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+            }
+
+            .loader {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: #0b0b0b;
+                display: grid;
+                place-items: center;
+            }
+
+            .loader__circle {
+                border: 16px solid #e3e3e3;
+                border-top: 16px solid #3498db;
+                border-radius: 50%;
+                width: 140px;
+                height: 140px;
+                animation: spin 1s linear infinite;
+                font-size: 50px;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+
         <!-- site description
         <meta name="description" content="">
         <meta name="author" content="">
@@ -22,8 +62,10 @@
         <meta property="og:image:width" content="1200"/>
         <meta property="og:image:height" content="630"/>
          -->
+
     </head>
     <body>
+        <div class="loader"><span class="loader__circle"></span></div>
         <div id="root"></div>
     </body>
 </html>
