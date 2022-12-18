@@ -27,13 +27,18 @@ const documentHeight = () => {
     const innerHeight = window.innerHeight
     if(innerHeight > 1024) {
       const doc = document.documentElement;
-      doc.style.setProperty('--doc-height', `${innerHeight}px`);
-      doc.style.setProperty('--doc-vh', `${innerHeight / 100}px`);
+      doc?.style.setProperty('--doc-height', `${innerHeight}px`);
+      doc?.style.setProperty('--doc-vh', `${innerHeight / 100}px`);
     }
   }, 200);
 };
 documentHeight();
 window.addEventListener('resize', documentHeight);
+
+/* setTimeout(()=>{
+  document.documentElement?.style.setProperty('--color-bg', '#000');
+  document.documentElement?.style.setProperty('--color-main', '#fff');
+}, 3000); */
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

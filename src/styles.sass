@@ -9,7 +9,7 @@ html
     background: $color-bg
 
 span
-    color: $color-font
+    color: $color-main
     transition-duration: .3s
 
 body
@@ -27,7 +27,7 @@ div#root
     -webkit-font-smoothing: antialiased
 
 *::selection
-    background: $color-font
+    background: $color-main
     color: $color-bg
 
 html::-webkit-scrollbar
@@ -39,11 +39,11 @@ html::-webkit-scrollbar-corner
 
 /* background of the scrollbar except button or resizer */
 html::-webkit-scrollbar-track
-    background: #fff
+    background: $color-bg
 
 /* scrollbar itself */
 html::-webkit-scrollbar-thumb
-    border: 5px solid #000
+    border: 5px solid $color-main
 
 /* set button(top and bottom of the scrollbar) */
 html::-webkit-scrollbar-button

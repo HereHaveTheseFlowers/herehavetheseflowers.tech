@@ -29,9 +29,9 @@ export function Header() {
                 <div className="menu-button" ref={menuButtonRef} onClick={handleMenuButton}>
                     <svg style={{display: "none"}}>
                         <defs>
-                            <filter id="gooeyness">
-                                <feGaussianBlur in="SourceGraphic" stdDeviation="2.4" result="blur" />
-                                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -11" result="gooeyness" />
+                             <filter id="gooeyness">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="1.8" result="blur" />
+                                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="gooeyness" />
                                 <feComposite in="SourceGraphic" in2="gooeyness" operator="atop" />
                             </filter>
                         </defs>

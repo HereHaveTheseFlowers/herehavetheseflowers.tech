@@ -13,8 +13,8 @@
     top: 0
     width: 20vw
     height: var(--doc-height)
-    background: white
-    border-left: 4px solid black
+    background: $color-bg
+    border-left: 4px solid $color-main
     z-index: $z-menu
     transition-duration: 0.5s
     transition-timing-function: ease
@@ -23,10 +23,9 @@
     width: 0
 
 .menu-button
-    height: 50px
-    width: 50px
+    height: 40px
+    width: 40px
     position: relative
-    transform: scale(0.7)
     z-index: $z-icons
 
 .menu-button__svg
@@ -36,25 +35,26 @@
 
 .menu-button__x
     transform: scale(0)
-    transition: transform 400ms
+    transition: transform 200ms
+    filter: url(#gooeyness)
+
+.menu-button__burger
+    filter: url(#gooeyness)
 
 .menu-button__line
     fill: none
-    stroke: black
+    stroke: $color-main
     stroke-width: 6px
     stroke-linecap: round
     stroke-linejoin: round
     transform-origin: 50%
-    transition: transform 400ms 100ms
+    transition: transform 600ms 20ms
 
 .menu-button__x-line
     stroke-width: 5.5px
 
-.active .menu-button__burger
-    filter: url(#gooeyness)
-
 .active .menu-button__line
-    transition: transform 400ms
+    transition: transform 600ms
 
 .active .menu-button__line_1
     transform: translateX(30%) translateY(-3%) rotate(-45deg) scale(.7)
@@ -75,5 +75,5 @@
     transform: translateX(-30%) translateY(3%) rotate(-45deg) scale(.7)
 
 .active .menu-button__x
-    transition: transform 400ms 100ms
+    transition: transform 600ms 100ms
     transform: scale(1)
