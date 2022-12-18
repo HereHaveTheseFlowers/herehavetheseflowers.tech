@@ -8,10 +8,32 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
 window.addEventListener('load', () => {
-  let loader = document.querySelector('.loader');
-  if(loader) loader.parentElement.removeChild(loader)
+  let loader = document.querySelector('.loader') as HTMLElement;
+  if(loader) {
+    loader.style.opacity = '0';
+    setTimeout(() => {
+      if(!loader) loader =  document.querySelector('.loader') as HTMLElement;
+      loader.parentElement.removeChild(loader)
+    }, 200);
+  }
   loader = null;
 });
+
+/* Mobile viewport height hack */
+let timeoutId: NodeJS.Timeout | null = null;
+const documentHeight = () => {
+  if(timeoutId) clearTimeout(timeoutId); // avoid execution of previous timeouts
+  timeoutId = setTimeout(() => {
+    const innerHeight = window.innerHeight
+    if(innerHeight > 1024) {
+      const doc = document.documentElement;
+      doc.style.setProperty('--doc-height', `${innerHeight}px`);
+      doc.style.setProperty('--doc-vh', `${innerHeight / 100}px`);
+    }
+  }, 200);
+};
+documentHeight();
+window.addEventListener('resize', documentHeight);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
