@@ -1,0 +1,26 @@
+.bouncybutton
+    height: 40px
+    width: 40px
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: $z-icons
+    border: 0
+    padding: 0
+    background: none
+    transform: scale(0.8)
+
+.bouncybutton__circlewrapper
+    width: 200%
+    height: 200%
+    position: absolute
+
+.bouncybutton__circle
+    width: 100%
+    height: 100%
+    filter: url(#gooeyness)
+    fill: $color-main
+    g
+        transform-box: fill-box
+        transform-origin: center

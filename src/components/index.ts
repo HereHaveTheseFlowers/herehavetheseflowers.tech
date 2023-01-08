@@ -1,3 +1,5 @@
 export * from './Button';
 export * from './Loader';
-export * from './Header';
+export * from './Navbar';
+export * from './BouncyButton';
+export * from './BouncyText';

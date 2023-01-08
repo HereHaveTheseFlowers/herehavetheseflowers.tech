@@ -1,0 +1,45 @@
+.button
+    background: $color-bg
+    position: relative
+    font-size: $font-normal
+    font-weight: normal
+    font-style: normal
+    color: $color-main
+    border: none
+    padding: $margin-little
+    border-radius: 2px
+    overflow: hidden
+    font-family: "Gilroy", Helvetica, sans-serif
+    border: $border-small solid $color-main
+    transition: 0.2s
+    &:before
+        content: " "
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        opacity: 0
+        z-index: -1
+        background: $color-main
+        transition: 0.2s
+    &:hover:before
+        opacity: $opacity-smallest
+    &:after
+        content: " "
+        position: absolute
+        top: 0
+        left: 0
+        opacity: 0
+        width: 100%
+        height: 100%
+        border: $border-small solid #000
+        pointer-events: none
+    &:hover:after
+        opacity: $opacity-smallest
+        
+.button.active
+    &:after
+        opacity: $opacity-smallest
+    &::before
+        opacity: $opacity-medium

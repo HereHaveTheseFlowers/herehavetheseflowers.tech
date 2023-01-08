@@ -1,32 +1,60 @@
-.header
+.navbar
     width: 100%
     display: flex
-    justify-content: space-between
-    //align-items: center
+    padding-bottom: $margin-small
+    position: relative
+    border-bottom: $border-normal solid $color-main
 
-.header__logo
-    font-size: 28px
+.navbar__logo
+    font-size: $font-big
+    cursor: pointer
+
+.navbar__buttons
+    display: flex
+    align-items: flex-start
+    position: absolute
+    right: 0
+    gap: $margin-normal
 
 .menu
     position: fixed
-    right: -4px
+    right: -$border-normal
     top: 0
-    width: 20vw
+    width: 240px
     height: var(--doc-height)
     background: $color-bg
-    border-left: 4px solid $color-main
+    border-left: $border-normal solid $color-main
     z-index: $z-menu
-    transition-duration: 0.5s
+    transition-duration: 0.2s
     transition-timing-function: ease
 
 .menu_state_hidden
     width: 0
 
-.menu-button
-    height: 40px
-    width: 40px
-    position: relative
+.navbar__menu
     z-index: $z-icons
+
+.navbar__palette
+    z-index: $z-icons
+
+//not needed
+
+.palette-button
+    height: 100%
+    width: 100%
+    display: flex
+
+.palette-button__svg
+    position: absolute
+    width: 100%
+    height: 100%
+    fill: $color-bg
+    filter: url(#gooeyness)
+
+.menu-button
+    height: 100%
+    width: 100%
+    display: flex
 
 .menu-button__svg
     position: absolute
@@ -43,7 +71,7 @@
 
 .menu-button__line
     fill: none
-    stroke: $color-main
+    stroke: $color-bg
     stroke-width: 6px
     stroke-linecap: round
     stroke-linejoin: round

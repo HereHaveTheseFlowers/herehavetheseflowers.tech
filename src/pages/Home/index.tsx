@@ -1,9 +1,9 @@
-import { Button, Header } from '../../components';
+import { Button, Navbar } from '../../components';
 
 export default function Home() {
     return (
         <>
-            <Header />
+            <Navbar />
         </>
     )
 }

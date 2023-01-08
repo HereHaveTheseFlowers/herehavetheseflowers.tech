@@ -1,7 +1,12 @@
-@import './utils/vars.sass'
+@import './constants/vars.sass'
 
-@import './components/Header/styles.sass'
+@import './components/Navbar/styles.sass'
 @import './components/BouncyText/styles.sass'
+@import './components/BouncyButton/styles.sass'
+@import './components/Button/styles.sass'
+@import './components/Input/styles.sass'
+@import './components/Palette/styles.sass'
+
 @import './pages/Home/styles.sass'
 
 html
@@ -23,8 +28,10 @@ body
     align-items: center
 
 div#root
-    font-family: Arial, Helvetica, sans-serif
+    font-family: 'Gilroy', Helvetica, sans-serif
     -webkit-font-smoothing: antialiased
+    font-weight: normal
+    font-style: normal
 
 *::selection
     background: $color-main
