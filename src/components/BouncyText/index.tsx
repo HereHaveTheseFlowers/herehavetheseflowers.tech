@@ -49,7 +49,7 @@ BouncyText.TextSpan = function BouncyTextSpan(props: React.PropsWithChildren) {
         }}
         onAnimationComplete={() => setIsPlaying(false)}
         >
-            {props.children === " " ? "/u000A0" : props.children}
+            {props.children === " " ? "\xA0" : props.children}
         </motion.span>
     )
 }

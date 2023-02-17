@@ -1,6 +1,5 @@
 export enum RouterList {
     HOME = '/',
-    NOT_FOUND = '/*',
-    ABOUT = '/about',
+    CATEGORY = '/*',
     SERVER_ERROR = '/server-error',
 }

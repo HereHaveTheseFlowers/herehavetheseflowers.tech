@@ -1,16 +1,27 @@
 import { useRef, useState } from 'react';
 import { BouncyText } from '../BouncyText';
+import { useNavigate } from 'react-router-dom';
 import { BouncyButton } from '../BouncyButton';
 import { Button } from '../Button';
 import { Palette } from '../Palette';
 import React from 'react';
+import store from '../../utils/Store';
+import { RouterList } from '../../router/routerList';
 
-export function Navbar() {
+type NavbarProps = {
+    category: string;
+}
+
+export function Navbar(props: NavbarProps) {
     const [menuActive, setMenuActive] = useState(false);
     const [paletteActive, setPaletteActive] = useState(false);
 
+    const navigate = useNavigate();
+
     const menuPaletteRef = React.createRef();
     const menuElementRef = useRef(null);
+
+    const categories = store.getState().categories;
 
     const handleMenuButton = () => {
         if(!menuElementRef.current) return;
@@ -39,9 +50,10 @@ export function Navbar() {
 
     return (
         <header className="navbar">
-            <div className="navbar__logo">
+            <div className="navbar__logo" onClick={()=>{navigate(RouterList.HOME)}}>
                 <BouncyText>HereHaveTheseFlowers</BouncyText>
             </div>
+            {props.category && <div className="navbar__category">• {props.category}</div>}
             <div className="navbar__buttons">
                 
                 <Button className="navbar__palette">
@@ -85,8 +97,14 @@ export function Navbar() {
                 </BouncyButton> */}
             </div>
 
-            <div className="menu menu_state_hidden" ref={menuElementRef}>
-
+            <div className="menu menu_state_hidden" ref={menuElementRef}> 
+                {categories.map((category: string, index: string) => {
+                    return (
+                        <div className="menu__category" onClick={()=>{navigate(`/${category.replaceAll(" ", "-")}`)}}>
+                            <BouncyText key={index}>{category}</BouncyText>
+                        </div>
+                    )
+                })}
             </div>
         </header>
     );

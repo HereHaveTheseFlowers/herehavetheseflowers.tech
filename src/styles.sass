@@ -5,6 +5,7 @@
 @import './components/BouncyButton/styles.sass'
 @import './components/Button/styles.sass'
 @import './components/Input/styles.sass'
+@import './components/SaturationColorPicker/styles.sass'
 @import './components/Palette/styles.sass'
 
 @import './pages/Home/styles.sass'
@@ -13,9 +14,11 @@ html
     scroll-behavior: smooth
     background: $color-bg
 
+*
+    transition: color .5s, border-color .5s
+
 span
     color: $color-main
-    transition-duration: .3s
 
 body
     margin: $margin-normal
@@ -32,10 +35,12 @@ div#root
     -webkit-font-smoothing: antialiased
     font-weight: normal
     font-style: normal
+    color: $color-main
 
 *::selection
     background: $color-main
     color: $color-bg
+    transition: 0.5s color
 
 html::-webkit-scrollbar
     width: 10px

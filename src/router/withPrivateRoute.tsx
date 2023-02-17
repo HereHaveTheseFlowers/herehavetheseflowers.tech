@@ -12,5 +12,5 @@ export function withPrivateRoute(children: JSX.Element) {
     } */
     const isAuth = true;
 
-    return isAuth ? children : <Navigate to={RouterList.ADMIN} replace />;
+    return isAuth ? children : <Navigate to={RouterList.ABOUT} replace />;
 }

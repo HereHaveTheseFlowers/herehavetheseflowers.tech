@@ -9,6 +9,13 @@
     font-size: $font-big
     cursor: pointer
 
+.navbar__category
+    font-size: $font-normal
+    color: $color-main
+    transition: 0.5s color
+    padding-left: $margin-little
+    align-self: center
+
 .navbar__buttons
     display: flex
     align-items: flex-start
@@ -18,6 +25,12 @@
 
 .menu
     position: fixed
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: flex-start
+    gap: $margin-normal
+    padding-top: calc($margin-small + $font-big + $margin-normal + $margin-normal)
     right: -$border-normal
     top: 0
     width: 240px
@@ -25,17 +38,28 @@
     background: $color-bg
     border-left: $border-normal solid $color-main
     z-index: $z-menu
-    transition-duration: 0.2s
-    transition-timing-function: ease
+    transition: all 0.2s ease
 
 .menu_state_hidden
     width: 0
+    opacity: 0
+
+.menu__category
+    cursor: pointer
+    font-size: $font-normal
+    &:hover
+        transform: scale(2)
+    &_current
+        border-bottom: $border-normal solid $color-main
 
 .navbar__menu
     z-index: $z-icons
 
 .navbar__palette
     z-index: $z-icons
+    display: flex
+    flex-direction: column
+    align-items: center
 
 //not needed
 
