@@ -1,0 +1,176 @@
+.blockgrid
+    width: 100%
+    display: flex
+    flex-wrap: wrap
+    padding: $margin-normal $margin-normal $margin-normal calc($margin-normal + $margin-normal)
+    gap: $margin-normal
+
+.block
+    height: 380px
+    flex-basis: calc(33.3333% - $margin-normal)
+    position: relative
+    padding: $margin-small
+    overflow: hidden
+    display: flex
+    flex-direction: column
+    &:after
+        content: " "
+        position: absolute
+        opacity: $opacity-full
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        z-index: -1
+        border-radius: 3% / 7%
+        border-style: solid
+        border-width: $border-normal
+        border-color: $color-main
+        transition: 0.5s color, 0.5s border-color, 0.2s opacity, 0.1s border-width ease
+    &:before
+        content: " "
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: $color-main
+        opacity: 0
+        border-radius: $border-radius
+    &:hover:after
+        opacity: $opacity-normal
+        border-width: $border-big
+
+.block__status
+    width: 100%
+    height: $margin-small
+    position: relative
+    display: flex
+    color: $color-main
+    transition: .5s color
+    line-height: 14px
+    flex: none
+
+.block__notification
+    height: 100%
+    fill: $color-main
+    transition: .5s fill
+    animation: ring 4s .7s ease-in-out infinite
+
+.block__notification-text
+    font-weight: 600
+    font-style: italic
+    margin-left: $margin-little
+
+.block__pinned
+    height: 100%
+    fill: $color-main
+    transition: .5s fill
+
+.block__date
+    margin-left: auto
+
+.block__category
+    height: 24px
+    width: 100%
+    margin-top: $margin-little
+    padding-left: $margin-petite
+    border-bottom-style: solid
+    border-bottom-width: $border-normal
+    border-bottom-color: $color-main
+    transition: 0.5s color, 0.5s border-bottom-color
+    flex: none
+    
+.block__thumbnail
+    margin-top: $margin-little
+    width: 100%
+    padding-bottom: 56.25%
+    height: 0
+    position: relative
+    overflow: hidden
+    flex: none
+    border-radius: $border-radius
+
+.block__thumbnail-image
+    width: 100%
+    height: auto
+    position: absolute
+    top: -50%
+    left: -50%
+    right: -50%
+    bottom: -50%
+    margin: auto
+
+.block__overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: $color-main
+    transition: .5s background-color
+    opacity: $opacity-none
+    mix-blend-mode: hue
+
+.block__name
+    margin-top: $margin-little
+    width: 100%
+    flex: none
+    font-size: $font-normal
+    font-weight: 600
+    padding-left: $margin-petite
+
+.block__description
+    margin-top: $margin-little
+    width: 100%
+    flex: none
+
+@keyframes ring
+    0%
+        transform: rotate(0)
+    1%
+        transform: rotate(30deg)
+    3%
+        transform: rotate(-28deg)
+    5%
+        transform: rotate(34deg)
+    7%
+        transform: rotate(-32deg)
+    9%
+        transform: rotate(30deg)
+    11%
+        transform: rotate(-28deg)
+    13%
+        transform: rotate(26deg)
+    15%
+        transform: rotate(-24deg)
+    17%
+        transform: rotate(22deg)
+    19%
+        transform: rotate(-20deg)
+    21%
+        transform: rotate(18deg)
+    23%
+        transform: rotate(-16deg)
+    25%
+        transform: rotate(14deg)
+    27%
+        transform: rotate(-12deg)
+    29%
+        transform: rotate(10deg)
+    31%
+        transform: rotate(-8deg)
+    33%
+        transform: rotate(6deg)
+    35%
+        transform: rotate(-4deg)
+    37%
+        transform: rotate(2deg)
+    39%
+        transform: rotate(-1deg)
+    41%
+        transform: rotate(1deg)
+    43%
+        transform: rotate(0)
+    100%
+        transform: rotate(0)

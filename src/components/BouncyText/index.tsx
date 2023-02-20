@@ -10,7 +10,7 @@ export function BouncyText(props: React.PropsWithChildren) {
         <>
             {text.map((letter, index) => {
                 return (
-                    <BouncyText.TextSpan key={index}>{letter}</BouncyText.TextSpan>
+                    <BouncyText.TextSpan key={index + Math.random()}>{letter}</BouncyText.TextSpan>
                 )
             })}
         </>

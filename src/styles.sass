@@ -7,12 +7,17 @@
 @import './components/Input/styles.sass'
 @import './components/SaturationColorPicker/styles.sass'
 @import './components/Palette/styles.sass'
+@import './components/BlockGrid/styles.sass'
 
 @import './pages/Home/styles.sass'
 
 html
     scroll-behavior: smooth
-    background: $color-bg
+    background-color: $color-bg
+    scrollbar-color: $color-main $color-bg
+    scrollbar-width: thin
+    transition: color .5s, scrollbar-color .5s, background-color .5s
+    overflow: overlay
 
 *
     transition: color .5s, border-color .5s
@@ -38,9 +43,9 @@ div#root
     color: $color-main
 
 *::selection
-    background: $color-main
+    background-color: $color-main
     color: $color-bg
-    transition: 0.5s color
+    transition: 0.5s color, 0.5s background-color
 
 html::-webkit-scrollbar
     width: 10px
@@ -55,7 +60,11 @@ html::-webkit-scrollbar-track
 
 /* scrollbar itself */
 html::-webkit-scrollbar-thumb
-    border: 5px solid $color-main
+    border-style: solid
+    background-clip: padding-box
+    border-width: 5px
+    border-color: $color-main
+    transition: 0.5s border-color
 
 /* set button(top and bottom of the scrollbar) */
 html::-webkit-scrollbar-button

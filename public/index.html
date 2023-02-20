@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="--doc-height: 100vh; --doc-vh: 1vh; --color-bg:#f7f7f7; --color-main:#8055aa;">
+<html lang="en" style="--doc-height: 100vh; --doc-vh: 1vh; --color-bg:#f6f7f2; --color-main:#634ab5;">
     <head>
         <base href="/" />
         <meta charset="utf-8" />
@@ -15,7 +15,7 @@
                 position: fixed;
                 top: 0;
                 left: 0;
-                background-color: #fff;
+                background-color: var(--color-bg);
                 display: grid;
                 place-items: center;
                 opacity: 1;
@@ -23,8 +23,10 @@
             }
 
             .loader__circle {
-                border: 16px solid #e3e3e3;
-                border-top: 16px solid rgb(80, 80, 80);
+                border-width: 16px;
+                border-style: solid;
+                border-color: var(--color-main);
+                border-top: 16px solid var(--color-bg);
                 border-radius: 50%;
                 width: 140px;
                 height: 140px;

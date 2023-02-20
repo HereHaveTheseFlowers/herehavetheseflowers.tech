@@ -9,7 +9,7 @@ import store from '../../utils/Store';
 import { RouterList } from '../../router/routerList';
 
 type NavbarProps = {
-    category: string;
+    category?: string;
 }
 
 export function Navbar(props: NavbarProps) {
@@ -46,6 +46,8 @@ export function Navbar(props: NavbarProps) {
             setPaletteActive(true)
         }
         document.querySelector('.navbar__palette')?.classList.toggle('active');
+        
+
     };
 
     return (
@@ -98,10 +100,10 @@ export function Navbar(props: NavbarProps) {
             </div>
 
             <div className="menu menu_state_hidden" ref={menuElementRef}> 
-                {categories.map((category: string, index: string) => {
+                {categories.map((category: string, index: number) => {
                     return (
                         <div className="menu__category" onClick={()=>{navigate(`/${category.replaceAll(" ", "-")}`)}}>
-                            <BouncyText key={index}>{category}</BouncyText>
+                            <BouncyText key={index+Math.random()}>{category}</BouncyText>
                         </div>
                     )
                 })}

@@ -7,8 +7,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import firestoreController from './controllers/firestoreController'
 
-window.addEventListener('load', () => {
+const controller = firestoreController;
+
+window.addEventListener('DOMContentLoaded', () => {
   let loader = document.querySelector('.loader') as HTMLElement;
   if(loader) {
     loader.style.opacity = '0';
@@ -19,6 +22,7 @@ window.addEventListener('load', () => {
   }
   loader = null;
 });
+
 
 /* Mobile viewport height hack */
 let timeoutId: NodeJS.Timeout | null = null;
