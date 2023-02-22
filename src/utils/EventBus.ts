@@ -28,6 +28,10 @@ export class EventBus<
     );
   }
 
+  clear<Event extends MapInterface<E>>(event: Event) {
+    this.listeners[event] = [];
+  }
+
   emit<Event extends MapInterface<E>>(event: Event, ...args: Args[Event]) {
     if (!this.listeners[event]) {
       return;

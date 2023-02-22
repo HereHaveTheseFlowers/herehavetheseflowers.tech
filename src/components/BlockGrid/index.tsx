@@ -118,6 +118,7 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
             </div>
             <div className="block__thumbnail">
                 <img className="block__thumbnail-image" src={thumbnailURL} alt={`${name} thumbnail`} />
+            <div className="block__overlay" />
             </div>
             <span className="block__name">
                 { name }
@@ -125,7 +126,6 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
             <span className="block__description">
                 { description }
             </span>
-            <div className="block__overlay" />
         </div>
     )
 };

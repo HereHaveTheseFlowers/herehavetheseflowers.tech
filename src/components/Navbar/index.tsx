@@ -50,6 +50,17 @@ export function Navbar(props: NavbarProps) {
 
     };
 
+    const handleThemeSwitcher = () => {
+        document.querySelector('.themeswitcher__semicircle')?.classList.toggle('active');
+        if(store.getState().theme === "dark") {
+            store.set("theme", "light")
+            window.localStorage.setItem("theme", "light");
+        } else {
+            store.set("theme", "dark")
+            window.localStorage.setItem("theme", "dark");
+        }
+    };
+
     return (
         <header className="navbar">
             <div className="navbar__logo" onClick={()=>{navigate(RouterList.HOME)}}>
@@ -107,6 +118,9 @@ export function Navbar(props: NavbarProps) {
                         </div>
                     )
                 })}
+                <button className="menu__themeswitcher themeswitcher" onClick={handleThemeSwitcher}>
+                    <div className={`themeswitcher__semicircle ${store.getState().theme === "dark" ? "active" : ""}`} />
+                </button>
             </div>
         </header>
     );

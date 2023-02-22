@@ -21,6 +21,11 @@ export class Store extends EventBus {
 
 const store = new Store();
 
+store.set("theme", "light")
+if(window.localStorage.getItem("theme")) {
+  store.set("theme", window.localStorage.getItem("theme"))
+}
+
 store.set("categories", ["web", "blog", "music", "about me"])
 
 export default store;

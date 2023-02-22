@@ -35,10 +35,12 @@
     top: 0
     width: 240px
     height: var(--doc-height)
-    background: $color-bg
-    border-left: $border-normal solid $color-main
+    background-color: $color-bg
+    border-left-color: $color-main
+    border-left-width: $border-normal
+    border-left-style: solid
     z-index: $z-menu
-    transition: all 0.2s ease
+    transition: .5s border-color, .5s color, .2s width, .2s opacity, .5s background-color
 
 .menu_state_hidden
     width: 0
@@ -52,6 +54,46 @@
         transform: scale(2)
     &_current
         border-bottom: $border-normal solid $color-main
+
+.menu__themeswitcher
+    margin-top: auto
+    margin-bottom: $margin-normal
+
+.themeswitcher
+    padding: 0
+    width: 40px
+    height: 40px
+    cursor: pointer
+    border: 0
+    background: none
+    position: relative
+    overflow: hidden
+    border-radius: 50%
+    &::after
+        content: ""
+        border-color: $color-main
+        border-style: solid
+        border-width: $border-big
+        border-radius: 50%
+        transition: .5s border-color
+        outline: none
+        position: absolute
+        width: 100%
+        height: 100%
+        top: 0
+        left: 0
+        
+.themeswitcher__semicircle
+    width: 100%
+    height: 50%
+    background-color: $color-main
+    transition: transform .5s, background-color .5s
+    position: absolute
+    top: 0
+    transform: translate(-19%, 14%) rotate(135deg)
+
+.themeswitcher__semicircle.active
+    transform: translate(17%, 83.8%) rotate(135deg)
 
 .navbar__menu
     z-index: $z-icons
