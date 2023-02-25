@@ -23,8 +23,14 @@ export class firestoreController {
     constructor() {
         this.app = initializeApp(firebaseConfig);
         this.db = getFirestore(this.app);
+        const that = this;
+        (async function(){
+            const blocks = await that.getBlocks();
+            if(blocks) store.set("blocks", blocks);
+        })();
     }
     async getBlocks() {
+        const collectionName = store.getState().lang === 'en' ? 'blocks' : 'blocks_ru'
         const blocksCol = collection(this.db, 'blocks');
         const blocksSnapshot = await getDocs(blocksCol);
         const blocksArr: DocumentData[] = [];

@@ -61,19 +61,20 @@
 
 .themeswitcher
     padding: 0
-    width: 40px
-    height: 40px
+    width: 30px
+    height: 30px
     cursor: pointer
     border: 0
     background: none
     position: relative
     overflow: hidden
     border-radius: 50%
+    transition: .5s transform
     &::after
         content: ""
         border-color: $color-main
         border-style: solid
-        border-width: $border-big
+        border-width: $border-normal
         border-radius: 50%
         transition: .5s border-color
         outline: none
@@ -82,6 +83,8 @@
         height: 100%
         top: 0
         left: 0
+    &.active
+        transform: rotate(180deg)
         
 .themeswitcher__semicircle
     width: 100%

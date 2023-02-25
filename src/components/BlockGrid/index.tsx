@@ -12,16 +12,22 @@ type BlockGridProps = {
 
 export function BlockGrid(props: BlockGridProps) {
     const globalCategory = props.category;
-    const [blocksList, setBlocksList] = useState([]);
+    const [blocksList, setBlocksList] = useState(store.getState().blocks);
     useEffect(()=>{
         (async function(){
-            const blocks = await firestoreController.getBlocks();
-            if(blocks) setBlocksList(blocks);
+            const updateBlocks = () => { setBlocksList(store.getState().blocks) }
+            store.on("blocks", updateBlocks)
         })();
     }, []);
+    console.log(blocksList)
     let blocksPinned: any[] = [];
-    let blocksListSorted = blocksList.sort((blockA, blockB)=>{return blockB.date - blockA.date})
-    blocksListSorted = blocksListSorted.filter(block => { 
+    let blocksListSorted = blocksList.sort((blockA: BlockProps, blockB: BlockProps)=>{
+        if(blockB.date?.seconds && blockA.date?.seconds)
+        return blockB.date.seconds - blockA.date.seconds
+        else 
+        return blockB
+    })
+    blocksListSorted = blocksListSorted.filter((block: BlockProps) => { 
         if(block.pinned) {
             blocksPinned.push(block);
             return false;
@@ -44,7 +50,7 @@ export function BlockGrid(props: BlockGridProps) {
                         />
                 }
             })}
-            {blocksListSorted.map((block, i)=> {
+            {blocksListSorted.map((block: BlockProps, i: number)=> {
                 if(!globalCategory || block.category === globalCategory) {
                 return <BlockGrid.Block 
                             key={i}

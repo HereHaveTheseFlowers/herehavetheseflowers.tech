@@ -24,7 +24,7 @@
         opacity: $opacity-none
         transition: 0.2s opacity
         pointer-events: none
-        border-radius: $border-radius
+        border-radius: 8%
         mix-blend-mode: saturation
         z-index: -100
     &:hover:before
@@ -86,6 +86,8 @@
     border-bottom-width: $border-normal
     border-bottom-color: $color-main
     flex: none
+    color: $color-main
+    transition: $transition-color color, $transition-color border-bottom-color
     
 .block__thumbnail
     margin-top: $margin-little

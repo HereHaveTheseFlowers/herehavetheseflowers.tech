@@ -21,11 +21,17 @@ export class Store extends EventBus {
 
 const store = new Store();
 
-store.set("theme", "light")
 if(window.localStorage.getItem("theme")) {
   store.set("theme", window.localStorage.getItem("theme"))
+} else {
+  store.set("theme", "light")
 }
-
+if(window.navigator.language === "ru") {
+  store.set("lang", "ru")
+} else {
+  store.set("lang", "en")
+}
 store.set("categories", ["web", "blog", "music", "about me"])
+store.set("blocks", [{ name: "loading" }])
 
 export default store;

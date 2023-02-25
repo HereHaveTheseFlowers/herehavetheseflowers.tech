@@ -52,6 +52,7 @@ export function Navbar(props: NavbarProps) {
 
     const handleThemeSwitcher = () => {
         document.querySelector('.themeswitcher__semicircle')?.classList.toggle('active');
+        document.querySelector('.themeswitcher')?.classList.toggle('active');
         if(store.getState().theme === "dark") {
             store.set("theme", "light")
             window.localStorage.setItem("theme", "light");

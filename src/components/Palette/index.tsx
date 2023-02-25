@@ -47,7 +47,8 @@ export const Palette = React.forwardRef((props, ref: any) => {
         const bgHueSwitched = colorHSL.h + 180 > 360 ? colorHSL.h + 180 - 360 : colorHSL.h + 180;
         let hexBGSwitched = ""
         if(store.getState().theme === "dark") {
-            hexBGSwitched = hslToHex(bgHueSwitched, defaultStatsBGDark.saturation, defaultStatsBGDark.lightness);
+            const BgDarkSaturation = colorHSL.s > 15 ? defaultStatsBGDark.saturation : 0;
+            hexBGSwitched = hslToHex(bgHueSwitched, BgDarkSaturation, defaultStatsBGDark.lightness);
         } else {
             hexBGSwitched = hslToHex(bgHueSwitched, defaultStatsBGLight.saturation, defaultStatsBGLight.lightness);
         }
@@ -73,12 +74,11 @@ export const Palette = React.forwardRef((props, ref: any) => {
         const bgHue = e.h + 180 > 360 ? e.h + 180 - 360 : e.h + 180;
         let hexBG = ""
         if(store.getState().theme === "dark") {
-            hexBG = hslToHex(bgHue, defaultStatsBGDark.saturation, defaultStatsBGDark.lightness);
+            const BgDarkSaturation = e.s > 15 ? defaultStatsBGDark.saturation : 0;
+            hexBG = hslToHex(bgHue, BgDarkSaturation, defaultStatsBGDark.lightness);
         } else {
             hexBG = hslToHex(bgHue, defaultStatsBGLight.saturation, defaultStatsBGLight.lightness);
         }
-        console.log(hex)
-        console.log(hexBG)
         if(!htmlElem) return;
         htmlElem.style
             .setProperty('--color-bg', hexBG)
@@ -93,6 +93,17 @@ export const Palette = React.forwardRef((props, ref: any) => {
             htmlElem.style
                 .setProperty('--color-main', hex)
         }
+        const bgHue = store.getState().colorHSL.h + 180 > 360 ? store.getState().colorHSL.h + 180 - 360 : store.getState().colorHSL.h + 180;
+        let hexBG = ""
+        if(store.getState().theme === "dark") {
+            const BgDarkSaturation = store.getState().colorHSL.s > 15 ? defaultStatsBGDark.saturation : 0;
+            hexBG = hslToHex(bgHue, BgDarkSaturation, defaultStatsBGDark.lightness);
+        } else {
+            hexBG = hslToHex(bgHue, defaultStatsBGLight.saturation, defaultStatsBGLight.lightness);
+        }
+        if(!htmlElem) return;
+        htmlElem.style
+            .setProperty('--color-bg', hexBG)
     }
 
     return (
