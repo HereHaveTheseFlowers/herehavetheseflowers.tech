@@ -15,7 +15,9 @@ export function Router() {
       <Routes>
         <Route path={RouterList.HOME}>
           <Route index element={<HomePage />} />
-          <Route path={":category"} element={<HomePage />} />
+          <Route path={":category"} element={<HomePage />}>
+            <Route path={":subcategory"} element={<HomePage />} />
+          </Route>
           {/* 
           <Route path={RouterList.SERVER_ERROR} element={<ServerErrorPage />} />
           <Route path={RouterList.NOT_FOUND} element={<NotFoundPage />} />

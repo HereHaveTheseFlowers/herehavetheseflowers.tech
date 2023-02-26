@@ -7,6 +7,7 @@ import { RouterList } from '../../router/routerList';
 import firestoreController from '../../controllers/firestoreController'
 
 type BlockGridProps = {
+    lang: string;
     category?: string;
 }
 
@@ -97,7 +98,6 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
         displayedDate = blockDate.toDateString();
         const currentYear = new Date().getFullYear();
         if(blockDate.getFullYear() === currentYear) {
-            console.log(displayedDate)
             displayedDate = displayedDate.replace(` ${currentYear}`, "")
         }
         isHot = true;

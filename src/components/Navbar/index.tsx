@@ -1,14 +1,16 @@
 import { useRef, useState } from 'react';
 import { BouncyText } from '../BouncyText';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BouncyButton } from '../BouncyButton';
 import { Button } from '../Button';
 import { Palette } from '../Palette';
 import React from 'react';
 import store from '../../utils/Store';
 import { RouterList } from '../../router/routerList';
+import firestoreController from '../../controllers/firestoreController'
 
 type NavbarProps = {
+    lang: string;
     category?: string;
 }
 
@@ -20,6 +22,7 @@ export function Navbar(props: NavbarProps) {
 
     const menuPaletteRef = React.createRef();
     const menuElementRef = useRef(null);
+    const langSwitcherRef = useRef(null);
 
     const categories = store.getState().categories;
 
@@ -61,6 +64,26 @@ export function Navbar(props: NavbarProps) {
             window.localStorage.setItem("theme", "dark");
         }
     };
+
+    const location = useLocation();
+    const handleLangSwitcher = () => {
+        console.log(props.lang)
+        if(props.lang === "en") {
+            const newPathname = location.pathname === "/" ? "/ru" : "/ru" + location.pathname
+            navigate(newPathname)
+            firestoreController.updateBlocks("ru")
+        } else {
+            const newPathname = location.pathname.replace("/ru", "") === "" ? "/" : location.pathname.replace("/ru", "")
+            navigate(newPathname)
+            firestoreController.updateBlocks("en")
+        }
+        if(!langSwitcherRef.current) return
+        if(langSwitcherRef.current.style.transform) {
+            langSwitcherRef.current.style.transform = ""
+        } else {
+            langSwitcherRef.current.style.transform = "rotate(360deg)"
+        }
+    }
 
     return (
         <header className="navbar">
@@ -114,14 +137,19 @@ export function Navbar(props: NavbarProps) {
             <div className="menu menu_state_hidden" ref={menuElementRef}> 
                 {categories.map((category: string, index: number) => {
                     return (
-                        <div className="menu__category" onClick={()=>{navigate(`/${category.replaceAll(" ", "-")}`)}}>
-                            <BouncyText key={index+Math.random()}>{category}</BouncyText>
+                        <div key={`${category} name`} className="menu__category" onClick={()=>{navigate(`/${category.replaceAll(" ", "-")}`)}}>
+                            <BouncyText>{category}</BouncyText>
                         </div>
                     )
                 })}
-                <button className="menu__themeswitcher themeswitcher" onClick={handleThemeSwitcher}>
-                    <div className={`themeswitcher__semicircle ${store.getState().theme === "dark" ? "active" : ""}`} />
-                </button>
+                <div className="menu__footer">
+                    <button className="themeswitcher" onClick={handleThemeSwitcher}>
+                        <div className={`themeswitcher__semicircle ${store.getState().theme === "dark" ? "active" : ""}`} />
+                    </button>
+                    <button className="langswitcher" onClick={handleLangSwitcher} ref={langSwitcherRef}>
+                        {props.lang.toUpperCase()}
+                    </button>
+                </div>
             </div>
         </header>
     );

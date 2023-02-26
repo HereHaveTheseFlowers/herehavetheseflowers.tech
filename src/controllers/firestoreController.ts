@@ -23,15 +23,15 @@ export class firestoreController {
     constructor() {
         this.app = initializeApp(firebaseConfig);
         this.db = getFirestore(this.app);
-        const that = this;
-        (async function(){
-            const blocks = await that.getBlocks();
-            if(blocks) store.set("blocks", blocks);
-        })();
+        this.updateBlocks();
     }
-    async getBlocks() {
-        const collectionName = store.getState().lang === 'en' ? 'blocks' : 'blocks_ru'
-        const blocksCol = collection(this.db, 'blocks');
+    public async updateBlocks(lang?: string) {
+        const blocks = await this.getBlocks(lang);
+        if(blocks) store.set("blocks", blocks);
+    }
+    private async getBlocks(lang?: string) {
+        const collectionName = lang === 'ru' ? 'blocks_ru' : 'blocks'
+        const blocksCol = collection(this.db, collectionName);
         const blocksSnapshot = await getDocs(blocksCol);
         const blocksArr: DocumentData[] = [];
         blocksSnapshot.docs.map(doc => {
@@ -40,13 +40,11 @@ export class firestoreController {
         });
         return blocksArr;
     }
-    async writeBlock(props: BlockProps) {
+    public async writeBlock(props: BlockProps) {
         try {
             const docRef = await addDoc(collection(this.db, "blocks"), {
               ...props
             });
-            // REMOVE THIS ON PROD
-            console.log("Document written with ID: ", docRef.id);
         } catch (e) {
             console.error("Error adding document: ", e);
         }
