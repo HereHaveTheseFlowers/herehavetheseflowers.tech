@@ -30,7 +30,7 @@ export class firestoreController {
         if(blocks) store.set("blocks", blocks);
     }
     private async getBlocks(lang?: string) {
-        const collectionName = lang === 'ru' ? 'blocks_ru' : 'blocks'
+        const collectionName = lang === 'ru' ? 'ru_blocks' : 'blocks'
         const blocksCol = collection(this.db, collectionName);
         const blocksSnapshot = await getDocs(blocksCol);
         const blocksArr: DocumentData[] = [];

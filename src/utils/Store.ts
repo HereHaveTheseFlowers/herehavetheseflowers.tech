@@ -26,12 +26,7 @@ if(window.localStorage.getItem("theme")) {
 } else {
   store.set("theme", "light")
 }
-if(window.navigator.language === "ru") {
-  store.set("lang", "ru")
-} else {
-  store.set("lang", "en")
-}
 store.set("categories", ["web", "blog", "music", "about me"])
-store.set("blocks", [{ name: "loading" }])
+store.set("blocks", [{ name: "loading" }, { name: "loading" }, { name: "loading" }, { name: "loading" }, { name: "loading" }, { name: "loading" }])
 
 export default store;

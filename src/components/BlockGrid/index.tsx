@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '../Button';
 import React from 'react';
 import store from '../../utils/Store';
 import { RouterList } from '../../router/routerList';
 import firestoreController from '../../controllers/firestoreController'
+import { translateCategory } from '../../pages/Home';
 
 type BlockGridProps = {
     lang: string;
@@ -20,7 +21,6 @@ export function BlockGrid(props: BlockGridProps) {
             store.on("blocks", updateBlocks)
         })();
     }, []);
-    console.log(blocksList)
     let blocksPinned: any[] = [];
     let blocksListSorted = blocksList.sort((blockA: BlockProps, blockB: BlockProps)=>{
         if(blockB.date?.seconds && blockA.date?.seconds)
@@ -48,6 +48,7 @@ export function BlockGrid(props: BlockGridProps) {
                             description={block.description}
                             content={block.content}
                             pinned={block.pinned}
+                            id={block.id}
                         />
                 }
             })}
@@ -62,6 +63,7 @@ export function BlockGrid(props: BlockGridProps) {
                             description={block.description}
                             content={block.content}
                             pinned={block.pinned}
+                            id={block.id}
                         />
                 }
             })}
@@ -77,6 +79,7 @@ export type BlockProps = {
     description: string;
     content: string;
     pinned: boolean;
+    id: string;
 };
 
 export type BlockPreviewProps = {
@@ -87,9 +90,12 @@ export type BlockPreviewProps = {
     description: string;
     content: string;
     pinned: boolean;
+    id: string;
 };
 
 BlockGrid.Block = function Block(props: BlockPreviewProps) {
+    const navigate = useNavigate();
+    const location = useLocation();
     const { category, date, name, thumbnailURL, description, pinned } = props;
     let isHot = false;
     let displayedDate = "---";
@@ -101,6 +107,13 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
             displayedDate = displayedDate.replace(` ${currentYear}`, "")
         }
         isHot = true;
+    }
+
+    const navigateToBlockPage = () => {
+        navigate(`${location.pathname.includes("/ru") ? "/ru" : ""}/${translateCategory(props.category, "en").replaceAll(" ", "-")}/block/${props.id}`)
+    }
+    const navigateToBlockCategory = () => {
+        navigate(`${location.pathname.includes("/ru") ? "/ru" : ""}/${props.category}`)
     }
     return (
         <div className="block">
@@ -120,13 +133,13 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
                 <span className="block__date" >{displayedDate}</span>
             </div>
             <div className="block__category">
-                { category }
+                <span className="block__category-span underlined" onClick={navigateToBlockCategory}>{ category }</span>
             </div>
-            <div className="block__thumbnail">
+            <div className="block__thumbnail" onClick={navigateToBlockPage}>
                 <img className="block__thumbnail-image" src={thumbnailURL} alt={`${name} thumbnail`} />
             <div className="block__overlay" />
             </div>
-            <span className="block__name">
+            <span className="block__name underlined" onClick={navigateToBlockPage}>
                 { name }
             </span>
             <span className="block__description">

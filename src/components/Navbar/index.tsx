@@ -8,6 +8,7 @@ import React from 'react';
 import store from '../../utils/Store';
 import { RouterList } from '../../router/routerList';
 import firestoreController from '../../controllers/firestoreController'
+import { translateCategory } from '../../pages/Home';
 
 type NavbarProps = {
     lang: string;
@@ -67,7 +68,6 @@ export function Navbar(props: NavbarProps) {
 
     const location = useLocation();
     const handleLangSwitcher = () => {
-        console.log(props.lang)
         if(props.lang === "en") {
             const newPathname = location.pathname === "/" ? "/ru" : "/ru" + location.pathname
             navigate(newPathname)
@@ -87,17 +87,17 @@ export function Navbar(props: NavbarProps) {
 
     return (
         <header className="navbar">
-            <div className="navbar__logo" onClick={()=>{navigate(RouterList.HOME)}}>
+            <div className="navbar__logo" onClick={()=>{navigate(location.pathname.includes("/ru") ? "/ru" : "/")}}>
                 <BouncyText>HereHaveTheseFlowers</BouncyText>
             </div>
             {props.category && <div className="navbar__category">• {props.category}</div>}
             <div className="navbar__buttons">
                 
                 <Button className="navbar__palette">
-                    <span onClick={handlePaletteButton}>COLOR</span>
+                    <span onClick={handlePaletteButton}>{`${props.lang === "ru" ? "ЦВЕТ" : "COLOR"}`}</span>
                     <Palette ref={menuPaletteRef} />
                 </Button>
-                <Button className="navbar__menu" onClick={handleMenuButton}>MENU</Button>
+                <Button className="navbar__menu" onClick={handleMenuButton}>{`${props.lang === "ru" ? "МЕНЮ" : "MENU"}`}</Button>
                 
                 {/* 
                 <BouncyButton onClick={handlePaletteButton} svgRef={menuPaletteRef}>
@@ -137,8 +137,12 @@ export function Navbar(props: NavbarProps) {
             <div className="menu menu_state_hidden" ref={menuElementRef}> 
                 {categories.map((category: string, index: number) => {
                     return (
-                        <div key={`${category} name`} className="menu__category" onClick={()=>{navigate(`/${category.replaceAll(" ", "-")}`)}}>
-                            <BouncyText>{category}</BouncyText>
+                        <div
+                            key={`${category} name`} 
+                            className={`menu__category ${props.category === category ? 'menu__category_active' : ''}`} 
+                            onClick={()=>{navigate(`${props.lang === "ru" ? "/ru" : ""}/${category.replaceAll(" ", "-")}`)}}
+                        >
+                            <BouncyText>{`${props.lang === "ru" ? translateCategory(category) : category}`}</BouncyText>
                         </div>
                     )
                 })}

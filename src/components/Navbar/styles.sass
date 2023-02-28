@@ -55,6 +55,9 @@
     &_current
         border-bottom: $border-normal solid $color-main
 
+.menu__category_active
+    transform: scale(2)
+
 .menu__footer
     margin-top: auto
     margin-bottom: $margin-normal
@@ -128,12 +131,14 @@
 
 .navbar__menu
     z-index: $z-icons
+    width: 80px
 
 .navbar__palette
     z-index: $z-icons
     display: flex
     flex-direction: column
     align-items: center
+    width: 80px
 
 //not needed
 

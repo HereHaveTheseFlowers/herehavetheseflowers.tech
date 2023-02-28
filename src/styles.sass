@@ -42,6 +42,24 @@ div#root
     font-style: normal
     color: $color-main
 
+.underlined
+    position: relative
+    &:after
+        content: ''
+        position: absolute
+        width: 0
+        height: $border-normal
+        display: block
+        bottom: 0
+        left: 0
+        background-color: $color-main
+        transition: width .5s ease, $transition-color background-color
+    &:hover:after
+        width: 100%
+
+.underlined-active:after
+    width: 100%
+
 *::selection
     background-color: $color-main
     color: $color-bg
