@@ -42,8 +42,6 @@ export function translateCategory(category: string, translateTo = "ru") {
 export default function Home() {
     const location = useLocation();
     let { category } = useParams();
-    console.log(location.pathname)
-    console.log(category)
     if(category) category = category.replaceAll("-", " ");
 
     const selectedLang = location.pathname.includes("/ru") === true ? "ru" : "en"

@@ -29,7 +29,7 @@ export const Palette = React.forwardRef((props, ref: any) => {
         const bgHue = colorHslInitial.h + 180 > 360 ? colorHslInitial.h + 180 - 360 : colorHslInitial.h + 180;
         let hexBG = ""
         if(store.getState().theme === "dark") {
-            hexBG = hslToHex(bgHue, defaultStatsBGDark.saturation, defaultStatsBGDark.lightness);
+            hexBG = hslToHex(colorHslInitial.h, defaultStatsBGDark.saturation, defaultStatsBGDark.lightness);
         } else {
             hexBG = hslToHex(bgHue, defaultStatsBGLight.saturation, defaultStatsBGLight.lightness);
         }
@@ -48,7 +48,7 @@ export const Palette = React.forwardRef((props, ref: any) => {
         let hexBGSwitched = ""
         if(store.getState().theme === "dark") {
             const BgDarkSaturation = colorHSL.s > 15 ? defaultStatsBGDark.saturation : 0;
-            hexBGSwitched = hslToHex(bgHueSwitched, BgDarkSaturation, defaultStatsBGDark.lightness);
+            hexBGSwitched = hslToHex(colorHSL.h, BgDarkSaturation, defaultStatsBGDark.lightness);
         } else {
             hexBGSwitched = hslToHex(bgHueSwitched, defaultStatsBGLight.saturation, defaultStatsBGLight.lightness);
         }
@@ -75,7 +75,7 @@ export const Palette = React.forwardRef((props, ref: any) => {
         let hexBG = ""
         if(store.getState().theme === "dark") {
             const BgDarkSaturation = e.s > 15 ? defaultStatsBGDark.saturation : 0;
-            hexBG = hslToHex(bgHue, BgDarkSaturation, defaultStatsBGDark.lightness);
+            hexBG = hslToHex(e.h, BgDarkSaturation, defaultStatsBGDark.lightness);
         } else {
             hexBG = hslToHex(bgHue, defaultStatsBGLight.saturation, defaultStatsBGLight.lightness);
         }
@@ -97,7 +97,7 @@ export const Palette = React.forwardRef((props, ref: any) => {
         let hexBG = ""
         if(store.getState().theme === "dark") {
             const BgDarkSaturation = store.getState().colorHSL.s > 15 ? defaultStatsBGDark.saturation : 0;
-            hexBG = hslToHex(bgHue, BgDarkSaturation, defaultStatsBGDark.lightness);
+            hexBG = hslToHex(store.getState().colorHSL.h , BgDarkSaturation, defaultStatsBGDark.lightness);
         } else {
             hexBG = hslToHex(bgHue, defaultStatsBGLight.saturation, defaultStatsBGLight.lightness);
         }

@@ -27,6 +27,13 @@ export function Navbar(props: NavbarProps) {
 
     const categories = store.getState().categories;
 
+    const isMobile: boolean = window.matchMedia('(max-device-width: 480px)').matches;
+    
+    const navigateToCategory = () => {
+        if(!props.category) return
+        navigate(`${location.pathname.includes("/ru") ? "/ru" : ""}/${translateCategory(props.category, "en").replaceAll(" ", "-")}`)
+    }
+
     const handleMenuButton = () => {
         if(!menuElementRef.current) return;
         if(menuActive) {
@@ -88,15 +95,17 @@ export function Navbar(props: NavbarProps) {
     return (
         <header className="navbar">
             <div className="navbar__logo" onClick={()=>{navigate(location.pathname.includes("/ru") ? "/ru" : "/")}}>
-                <BouncyText>HereHaveTheseFlowers</BouncyText>
+                <BouncyText>
+                    { isMobile ? 'HHTF' : 'HereHaveTheseFlowers' }
+                </BouncyText>
             </div>
-            {props.category && <div className="navbar__category">• {props.category}</div>}
+            {props.category && <div className="navbar__category" onClick={navigateToCategory}>• {props.category}</div>}
             <div className="navbar__buttons">
-                
+            { !isMobile && 
                 <Button className="navbar__palette">
                     <span onClick={handlePaletteButton}>{`${props.lang === "ru" ? "ЦВЕТ" : "COLOR"}`}</span>
                     <Palette ref={menuPaletteRef} />
-                </Button>
+                </Button> }
                 <Button className="navbar__menu" onClick={handleMenuButton}>{`${props.lang === "ru" ? "МЕНЮ" : "MENU"}`}</Button>
                 
                 {/* 
@@ -147,6 +156,12 @@ export function Navbar(props: NavbarProps) {
                     )
                 })}
                 <div className="menu__footer">
+                    { isMobile && 
+                        <Button className="navbar__palette" style={{gridColumn: "1 / span 2", justifySelf: "center"}}>
+                            <span onClick={handlePaletteButton}>{`${props.lang === "ru" ? "ЦВЕТ" : "COLOR"}`}</span>
+                            <Palette ref={menuPaletteRef} />
+                        </Button>
+                    }
                     <button className="themeswitcher" onClick={handleThemeSwitcher}>
                         <div className={`themeswitcher__semicircle ${store.getState().theme === "dark" ? "active" : ""}`} />
                     </button>

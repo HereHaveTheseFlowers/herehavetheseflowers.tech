@@ -4,6 +4,12 @@
     flex-wrap: wrap
     padding: $margin-normal $margin-normal $margin-normal calc($margin-normal + $margin-normal)
     gap: $margin-normal
+    @media screen and (max-width: $breakpoint-tablet)
+        padding: $margin-small 0
+        margin-left: $margin-normal
+        gap: $margin-small
+    @media screen and (max-width: $breakpoint-phone)
+        margin-left: 0
 
 .block
     height: 400px
@@ -13,6 +19,11 @@
     overflow: hidden
     display: flex
     flex-direction: column
+    @media screen and (max-width: $breakpoint-tablet)
+        flex-basis: calc(50% - $margin-normal)
+        height: 345px
+    @media screen and (max-width: $breakpoint-phone)
+        flex-basis: 100%
     &:before
         content: " "
         position: absolute
@@ -59,12 +70,14 @@
     flex: none
 
 .block__notification
+    cursor: pointer
     height: 100%
     fill: $color-main
     transition: .5s fill
     animation: ring 4s .7s ease-in-out infinite
 
 .block__notification-text
+    cursor: pointer
     font-weight: 600
     font-style: italic
     margin-left: $margin-little
@@ -75,6 +88,7 @@
     transition: .5s fill
 
 .block__date
+    cursor: pointer
     margin-left: auto
 
 .block__category
@@ -91,9 +105,10 @@
 
 .block__category-span
     cursor: pointer
+    margin-bottom: 5px !important
     
 .block__thumbnail
-    margin-top: $margin-little
+    margin-top: $margin-petite
     width: 100%
     padding-bottom: 56.25%
     height: 0
@@ -127,7 +142,7 @@
         opacity: $opacity-full
 
 .block__name
-    margin-top: $margin-little
+    margin-top: $margin-petite
     width: 100%
     flex: none
     font-size: $font-normal
@@ -136,6 +151,7 @@
     cursor: pointer
 
 .block__description
+    cursor: pointer
     margin-top: $margin-little
     width: 100%
     flex: none

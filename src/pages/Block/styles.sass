@@ -1,0 +1,79 @@
+.block-article
+    width: 100%
+    margin-top: $margin-normal
+    display: flex
+    justify-content: center
+    min-height: 80vh
+
+.block-article__thumbnail-wrapper
+    width: 50%
+    position: relative
+    overflow: hidden
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.block-article__thumbnail-image
+    object-fit: contain
+    width: 80%
+    //transform: rotate(-90deg)
+
+.block-article__info
+    width: 50%
+    padding: 0 $margin-normal
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+
+.block-article__content
+    margin-top: $margin-normal
+    width: 100%
+    font-size: $font-normal
+    transition: $transition-color color
+    color: $color-main
+
+.block-article__name
+    width: 100%
+    font-size: $font-large
+    font-weight: 600
+    transition: $transition-color color
+    color: $color-main
+
+.block-article__link
+    width: 100%
+    margin-top: $margin-normal
+    font-size: $font-normal
+    color: $color-main
+    transition: $transition-color color
+
+.block-article__github
+    width: 100%
+    font-weight: 600
+    margin-top: $margin-normal
+    font-size: $font-normal
+    color: $color-main
+    transition: $transition-color color
+
+.block-article__footer
+    width: 100%
+    display: flex
+    margin-top: $margin-normal
+    font-size: $font-normal
+    margin-top: auto
+
+.block-article__category
+    text-align: right
+    width: 50%
+    color: $color-main
+    transition: $transition-color color
+
+.block-article__category-span
+    cursor: pointer
+    
+.block-article__date
+    width: 50%
+    align-self: flex-end
+    color: $color-main
+    transition: $transition-color color
+

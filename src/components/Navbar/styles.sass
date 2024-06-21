@@ -15,6 +15,7 @@
     transition: 0.5s color
     padding-left: $margin-little
     align-self: center
+    cursor: pointer
 
 .navbar__buttons
     display: flex
@@ -22,6 +23,8 @@
     position: absolute
     right: 0
     gap: $margin-normal
+    @media screen and (max-width: $breakpoint-phone)
+        gap: $margin-small
 
 .menu
     position: fixed
@@ -33,7 +36,7 @@
     padding-top: calc($margin-small + $font-big + $margin-normal + $margin-normal)
     right: -$border-normal
     top: 0
-    width: 240px
+    width: calc(80px * 2 + $margin-normal * 3)
     height: var(--doc-height)
     background-color: $color-bg
     border-left-color: $color-main
@@ -41,6 +44,8 @@
     border-left-style: solid
     z-index: $z-menu
     transition: .5s border-color, .5s color, .2s width, .2s opacity, .5s background-color
+    @media screen and (max-width: $breakpoint-phone)
+        width: 50vw
 
 .menu_state_hidden
     width: 0
@@ -61,8 +66,13 @@
 .menu__footer
     margin-top: auto
     margin-bottom: $margin-normal
-    display: flex
-    gap: $margin-normal
+    display: grid
+    grid-template-columns: auto auto
+    grid-template-rows: auto
+    column-gap: $margin-small
+    @media screen and (max-width: $breakpoint-phone)
+        row-gap: $margin-small
+        column-gap: $margin-small
 
 .langswitcher
     padding: 0
@@ -101,6 +111,7 @@
     overflow: hidden
     border-radius: 50%
     transition: .5s transform
+    justify-self: end
     &::after
         content: ""
         border-color: $color-main
