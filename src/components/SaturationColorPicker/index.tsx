@@ -40,10 +40,10 @@ export function SaturationColorPicker(props: SaturationColorPickerProps) {
                 const cursorPos = e.clientX - rect.left
                 const percent = (cursorPos*100)/pickerWidth - 6;
                 if(percent >= 100) {
-                    cursorElement.current.style.left = "100%";
+                    cursorElement.current.style.left = "99%";
                     store.set("colorHSL.s", 100)
                 } else if(percent <= 0) {
-                    cursorElement.current.style.left = "0%";
+                    cursorElement.current.style.left = "1%";
                     store.set("colorHSL.s", 0)
                 } else {
                     cursorElement.current.style.left = `${percent.toFixed(2)}%`;

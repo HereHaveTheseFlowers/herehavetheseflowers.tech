@@ -2,8 +2,13 @@
     width: 100%
     display: flex
     padding-bottom: $margin-small
-    position: relative
+    padding-top: $margin-normal
+    position: sticky
+    top: 0
+    background-color: $color-bg
+    z-index: $z-header
     border-bottom: $border-normal solid $color-main
+    transition: 0.5s border-color, 0.5s background-color
 
 .navbar__logo
     font-size: $font-big
@@ -71,6 +76,7 @@
     grid-template-rows: auto
     column-gap: $margin-small
     @media screen and (max-width: $breakpoint-phone)
+        margin-bottom: calc($margin-normal + $margin-small)
         row-gap: $margin-small
         column-gap: $margin-small
 
