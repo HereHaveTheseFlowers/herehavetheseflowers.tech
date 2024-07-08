@@ -5,6 +5,7 @@ import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from 'fireb
 import type { Firestore, DocumentData } from 'firebase/firestore/lite';
 import type { FirebaseApp } from 'firebase/app';
 import type { BlockProps } from '../components/BlockGrid';
+import { useLocation } from 'react-router-dom';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAJsmH1fEop_sRciw988ElrUGJnJJMgmiY",
@@ -21,9 +22,10 @@ export class firestoreController {
     private readonly db: Firestore;
 
     constructor() {
+        const selectedLang = document.location.pathname.includes("/ru") === true ? "ru" : "en"
         this.app = initializeApp(firebaseConfig);
         this.db = getFirestore(this.app);
-        this.updateBlocks();
+        this.updateBlocks(selectedLang);
     }
     public async updateBlocks(lang?: string) {
         const blocks = await this.getBlocks(lang);

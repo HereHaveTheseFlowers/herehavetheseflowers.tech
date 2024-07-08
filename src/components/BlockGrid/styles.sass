@@ -19,28 +19,30 @@
     overflow: hidden
     display: flex
     flex-direction: column
+    align-items: flex-start
     @media screen and (max-width: $breakpoint-tablet)
         flex-basis: calc(50% - $margin-normal)
         height: 345px
     @media screen and (max-width: $breakpoint-phone)
         flex-basis: 100%
-    &:before
+    &:after
         content: " "
         position: absolute
         top: 0
         left: 0
         width: 100%
         height: 100%
-        background: hsl(0deg, 5%, 50%)
         opacity: $opacity-none
         transition: 0.2s opacity
         pointer-events: none
-        border-radius: 8%
-        mix-blend-mode: saturation
-        z-index: -100
-    &:hover:before
-        opacity: $opacity-full
-    &:after
+        border-radius: 16px
+        z-index: 100
+        mix-blend-mode: hue
+        animation: 0.8s ease 1 overlayfadein
+    &:hover:after
+        background: $color-main
+        opacity: $opacity-strong
+    &:before
         content: " "
         position: absolute
         opacity: $opacity-full
@@ -49,25 +51,25 @@
         width: 100%
         height: 100%
         z-index: -1
-        border-radius: 8%
+        border-radius: 16px
         border-style: solid
         border-width: $border-normal
         border-color: $color-main
         transition: 0.5s color, 0.5s border-color, 0.2s opacity, 0.1s border-width ease
         pointer-events: none
-    &:hover:after
-        opacity: $opacity-normal
-        border-width: $border-big
+    &:hover:before
+        border-width: $border-strong
 
 .block__status
     width: 100%
-    height: $margin-small
+    height: calc($font-small + $margin-little * 2)
     position: relative
     display: flex
     color: $color-main
     transition: .5s color
     line-height: 14px
     flex: none
+    align-items: center
 
 .block__notification
     cursor: pointer
@@ -83,29 +85,47 @@
     margin-left: $margin-little
 
 .block__pinned
-    height: 100%
+    height: 80%
     fill: $color-main
     transition: .5s fill
+    margin-left: $margin-petite
+    pointer-events: none
 
 .block__date
     cursor: pointer
     margin-left: auto
 
 .block__category
-    height: 24px
-    width: 100%
-    margin-top: $margin-little
-    padding-left: $margin-petite
-    border-bottom-style: solid
-    border-bottom-width: $border-normal
-    border-bottom-color: $color-main
+    position: relative
+    padding-inline: $margin-petite
     flex: none
     color: $color-main
-    transition: $transition-color color, $transition-color border-bottom-color
+    transition: $transition-color color, $transition-color border-color
+    border-style: solid
+    border-width: $border-normal
+    border-color: $color-main
+    border-radius: $border-radius-notification
+    overflow: hidden
+    cursor: pointer
+    z-index: 1000
+    &:before
+        content: " "
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        opacity: 0
+        z-index: -1
+        background-color: $color-main
+        transition: 0.5s background-color, 0.2s opacity
+    &:hover:before
+        opacity: $opacity-smallest
 
 .block__category-span
     cursor: pointer
-    margin-bottom: 5px !important
+    font-size: $font-small
+    line-height: calc($font-small + $margin-little * 2)
     
 .block__thumbnail
     margin-top: $margin-petite
@@ -119,8 +139,8 @@
     cursor: pointer
 
 .block__thumbnail-image
-    width: 100%
-    height: auto
+    width: auto
+    height: 100%
     position: absolute
     top: -50%
     left: -50%
@@ -134,23 +154,18 @@
     left: 0
     width: 100%
     height: 100%
-    background-color: $color-main
-    transition: .5s background-color, .5s opacity
-    opacity: $opacity-none
-    mix-blend-mode: hue
-    &:hover
-        opacity: $opacity-full
+    cursor: pointer
 
 .block__name
     margin-top: $margin-petite
-    width: 100%
     flex: none
     font-size: $font-normal
     font-weight: 600
-    padding-left: $margin-petite
+    margin-left: $margin-little
     cursor: pointer
 
 .block__description
+    margin-left: $margin-little
     cursor: pointer
     margin-top: $margin-little
     width: 100%
@@ -205,3 +220,11 @@
         transform: rotate(0)
     100%
         transform: rotate(0)
+
+
+@keyframes overlayfadein
+  0%
+    opacity: 0
+  100%
+    opacity: 0
+

@@ -131,10 +131,10 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
         return (
             <div className="block">
                 <div className="block__status">
-                    <span className="block__date skeleton-box" style={{width: '20%'}} ></span>
-                </div>
-                <div className="block__category">
-                    <span className="block__category-span skeleton-box" style={{width: '20%'}}>{'\xa0'}</span>
+                    <div className="block__category">
+                        <span className="block__category-span skeleton-box" style={{width: '30px'}}>{'\xa0'}</span>
+                    </div>
+                    <div className="block__date skeleton-box" style={{width: '35%', height: '100%'}} ></div>
                 </div>
                 <div className="block__thumbnail">
                     <img className="block__thumbnail-image image_state_unloaded" src={thumbnailURL} alt={`${name} thumbnail`} onLoad={() => {
@@ -158,10 +158,12 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
             </div>
         )
     } else if(name && imageLoading) {
-        console.log("render imageLoading")
         return (
-            <div className="block">
+            <div className="block block_state_loaded">
                 <div className="block__status">
+                    <a className="block__category">
+                        <span className="block__category-span" onClick={navigateToBlockCategory}>{ category }</span>
+                    </a>
                     { pinned && <svg className="block__pinned" viewBox="0 0 800 799.83">
                                     <path d="M793.18 192.28c19.95-20-5.35-77.75-56.6-129-50.65-50.64-107.48-75.82-128.14-57.1l-.4-.39-283.91 
                                         255c-52.5-45.76-131.87-44.2-181.87 5.77a44.91 44.91 0 0 0 0 63.52l128.8 128.8L6.38 757.63a25.37 25.37 
@@ -176,9 +178,6 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
                                 </svg><span className="block__notification-text">NEW!</span></> }
                     <span className="block__date" >{displayedDate}</span>
                 </div>
-                <div className="block__category">
-                    <span className="block__category-span underlined" onClick={navigateToBlockCategory}>{ category }</span>
-                </div>
                 <div className="block__thumbnail" onClick={navigateToBlockPage}>
                     <img className="block__thumbnail-image image_state_unloaded" src={thumbnailURL} alt={`${name} thumbnail`} onLoad={() => {
                             handleImageLoaded();
@@ -192,12 +191,17 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
                 <span className="block__description">
                     { description }
                 </span>
+                <div className="block__overlay" onClick={navigateToBlockPage}></div>
             </div>
         )
     } else {
         return (
-            <div className="block">
+            <div className="block block_state_loaded" >
+                <div className="block__overlay" onClick={navigateToBlockPage}></div>
                 <div className="block__status">
+                    <a className="block__category" onClick={navigateToBlockCategory}>
+                        <span className="block__category-span">{ category }</span>
+                    </a>
                     { pinned && <svg className="block__pinned" viewBox="0 0 800 799.83">
                                     <path d="M793.18 192.28c19.95-20-5.35-77.75-56.6-129-50.65-50.64-107.48-75.82-128.14-57.1l-.4-.39-283.91 
                                         255c-52.5-45.76-131.87-44.2-181.87 5.77a44.91 44.91 0 0 0 0 63.52l128.8 128.8L6.38 757.63a25.37 25.37 
@@ -212,17 +216,13 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
                                 </svg><span className="block__notification-text" onClick={navigateToBlockPage}>NEW!</span></> }
                     <span className="block__date" onClick={navigateToBlockPage}>{displayedDate}</span>
                 </div>
-                <div className="block__category">
-                    <span className="block__category-span underlined" onClick={navigateToBlockCategory}>{ category }</span>
-                </div>
                 <div className="block__thumbnail" onClick={navigateToBlockPage}>
                     <img className="block__thumbnail-image image_state_loaded" src={thumbnailURL} alt={`${name} thumbnail`} />
-                    <div className="block__overlay" />
                 </div>
                 <span className="block__name underlined" onClick={navigateToBlockPage}>
                     { name }
                 </span>
-                <span className="block__description" onClick={navigateToBlockPage}>
+                <span className="block__description" >
                     { description }
                 </span>
             </div>

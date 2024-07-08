@@ -99,7 +99,7 @@ export function Navbar(props: NavbarProps) {
                     { isMobile ? 'HHTF' : 'HereHaveTheseFlowers' }
                 </BouncyText>
             </div>
-            {props.category && <div className="navbar__category" onClick={navigateToCategory}>• {props.category}</div>}
+            {props.category && <div className="navbar__category" onClick={navigateToCategory}>• <BouncyText>{props.category}</BouncyText></div>}
             <div className="navbar__buttons">
             { !isMobile && 
                 <Button className="navbar__palette">

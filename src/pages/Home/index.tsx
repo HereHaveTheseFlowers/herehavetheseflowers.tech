@@ -19,6 +19,9 @@ export function translateCategory(category: string, translateTo = "ru") {
             case "about me":
                 translatedCategory = "обо мне";
                 break;
+            case "about-me":
+                translatedCategory = "обо мне";
+                break;
         }
     } else if(translateTo === "en") {
         switch(category) {
@@ -34,6 +37,9 @@ export function translateCategory(category: string, translateTo = "ru") {
             case "обо мне":
                 translatedCategory = "about me";
                 break;
+            case "обо-мне":
+                translatedCategory = "about me";
+                break;
         }
     }
     return translatedCategory;
@@ -43,7 +49,6 @@ export default function Home() {
     const location = useLocation();
     let { category } = useParams();
     if(category) category = category.replaceAll("-", " ");
-
     const selectedLang = location.pathname.includes("/ru") === true ? "ru" : "en"
     
     useEffect(()=>{

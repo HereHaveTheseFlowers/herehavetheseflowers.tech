@@ -1,15 +1,15 @@
 
 export const defaultStatsMain = {
     saturation: 50,
-    lightness: 50,
+    lightness: 38,
 };
 
 export const defaultStatsBGLight = {
-    saturation: 25,
-    lightness: 96,
+    saturation: 14,
+    lightness: 94,
 };
 
 export const defaultStatsBGDark = {
-    saturation: 65,
-    lightness: 10,
+    saturation: 45,
+    lightness: 8,
 };

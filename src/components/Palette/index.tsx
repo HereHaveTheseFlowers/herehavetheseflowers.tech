@@ -6,6 +6,35 @@ import { Hue } from 'react-color/lib/components/common';
 import store from '../../utils/Store';
 import { defaultStatsMain, defaultStatsBGLight, defaultStatsBGDark } from './stats';
 
+function calculateComplimentaryColor(initialC: number) {
+    if(initialC >= 345 || initialC <= 10) { // red
+        return 159; // green
+    } else if(initialC <= 29) { // red-orange
+        return 192; // blue-green
+    } else if(initialC <= 40) { // orange
+        return 202; // blue
+    } else if(initialC <= 51) { // orange-yellow
+        return 230; // purple-blue
+    } else if(initialC <= 68) { // yellow
+        return 287; // purple
+    } else if(initialC <= 123) { //yellow-green
+        return 322;
+    } else if(initialC <= 192) { //green
+        return 1; //red
+    } else if(initialC <= 197) { //green-blue
+        return 19;
+    } else if (initialC <= 216) { // blue
+        return 32;
+    } else if(initialC <= 260) { //purple-blue
+        return 46;
+    } else if(initialC <= 306) { //purple
+        return 57;
+    }else if(initialC <= 344) { //red-purple 
+        return 78;
+    }
+    return 0
+}
+
 export const Palette = React.forwardRef((props, ref: any) => {
     const htmlElem = document.querySelector("html");
     let colorHexInitial = "";
@@ -19,14 +48,15 @@ export const Palette = React.forwardRef((props, ref: any) => {
             htmlElem.style
                 .setProperty('--color-main', colorHexInitial)
         }
-        if(htmlElem) {
+        /* else if(htmlElem) {
             colorHexInitial = getComputedStyle(htmlElem)
                 .getPropertyValue('--color-main');
-        }
+        } */
         if(!colorHexInitial) colorHexInitial = "#8055aa";
         colorHslInitial = hexToHsl(colorHexInitial);
         setColorHSL(colorHslInitial)
-        const bgHue = colorHslInitial.h + 180 > 360 ? colorHslInitial.h + 180 - 360 : colorHslInitial.h + 180;
+        //const bgHue = colorHslInitial.h + 180 > 360 ? colorHslInitial.h + 180 - 360 : colorHslInitial.h + 180;
+        const bgHue = calculateComplimentaryColor(colorHslInitial.h)
         let hexBG = ""
         if(store.getState().theme === "dark") {
             hexBG = hslToHex(colorHslInitial.h, defaultStatsBGDark.saturation, defaultStatsBGDark.lightness);
@@ -44,7 +74,8 @@ export const Palette = React.forwardRef((props, ref: any) => {
     }, []);
     store.clear("theme");
     store.on("theme", () => {
-        const bgHueSwitched = colorHSL.h + 180 > 360 ? colorHSL.h + 180 - 360 : colorHSL.h + 180;
+        //const bgHueSwitched = colorHSL.h + 180 > 360 ? colorHSL.h + 180 - 360 : colorHSL.h + 180;
+        const bgHueSwitched = calculateComplimentaryColor(colorHSL.h)
         let hexBGSwitched = ""
         if(store.getState().theme === "dark") {
             const BgDarkSaturation = colorHSL.s > 15 ? defaultStatsBGDark.saturation : 0;
@@ -71,7 +102,8 @@ export const Palette = React.forwardRef((props, ref: any) => {
             htmlElem.style
                 .setProperty('--color-main', hex)
         }
-        const bgHue = e.h + 180 > 360 ? e.h + 180 - 360 : e.h + 180;
+        //const bgHue = e.h + 180 > 360 ? e.h + 180 - 360 : e.h + 180;
+        const bgHue = calculateComplimentaryColor(e.h)
         let hexBG = ""
         if(store.getState().theme === "dark") {
             const BgDarkSaturation = e.s > 15 ? defaultStatsBGDark.saturation : 0;
@@ -93,7 +125,8 @@ export const Palette = React.forwardRef((props, ref: any) => {
             htmlElem.style
                 .setProperty('--color-main', hex)
         }
-        const bgHue = store.getState().colorHSL.h + 180 > 360 ? store.getState().colorHSL.h + 180 - 360 : store.getState().colorHSL.h + 180;
+        //const bgHue = store.getState().colorHSL.h + 180 > 360 ? store.getState().colorHSL.h + 180 - 360 : store.getState().colorHSL.h + 180;
+        const bgHue = calculateComplimentaryColor(store.getState().colorHSL.h)
         let hexBG = ""
         if(store.getState().theme === "dark") {
             const BgDarkSaturation = store.getState().colorHSL.s > 15 ? defaultStatsBGDark.saturation : 0;
