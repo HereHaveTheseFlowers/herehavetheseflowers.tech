@@ -5,12 +5,12 @@ import { Loader } from '../components';
 import { RouterList } from './routerList';
 
 export function withPrivateRoute(children: JSX.Element) {
-/*     const { isAuth, isLoadingAuth } = useAuth();
+  /*     const { isAuth, isLoadingAuth } = useAuth();
 
     if (isLoadingAuth) {
         return <Loader />;
     } */
-    const isAuth = true;
+  const isAuth = true;
 
-    return isAuth ? children : <Navigate to={RouterList.ABOUT} replace />;
+  return isAuth ? children : <Navigate to={RouterList.ABOUT} replace />;
 }

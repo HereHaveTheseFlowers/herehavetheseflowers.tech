@@ -21,26 +21,24 @@ export function Router() {
           <Route path={RouterList.NOT_FOUND} element={<NotFoundPage />} />
           */}
         </Route>
-          <Route path={'/ru'}>
+        <Route path={'/ru'}>
+          <Route index element={<HomePage />} />
+          <Route path={'/ru/:category'}>
             <Route index element={<HomePage />} />
-            <Route path={"/ru/:category"}>
-              <Route index element={<HomePage />} />
-              <Route path={'/ru/:category/block'}>
-                <Route index element={<NotFoundPage />} />
-                <Route path={":blockId"} element={<BlockPage />} />
-              </Route>
-            </Route>
-          </Route>
-          <Route path={":category"}>
-            <Route index element={<HomePage />} />
-            <Route path={"/:category/block"} >
+            <Route path={'/ru/:category/block'}>
               <Route index element={<NotFoundPage />} />
-              <Route path={":blockId"} element={<BlockPage />}>
-              </Route>
+              <Route path={':blockId'} element={<BlockPage />} />
             </Route>
           </Route>
-          <Route path={"*"} element={<NotFoundPage />}>
+        </Route>
+        <Route path={':category'}>
+          <Route index element={<HomePage />} />
+          <Route path={'/:category/block'}>
+            <Route index element={<NotFoundPage />} />
+            <Route path={':blockId'} element={<BlockPage />}></Route>
           </Route>
+        </Route>
+        <Route path={'*'} element={<NotFoundPage />}></Route>
       </Routes>
     </Suspense>
   );

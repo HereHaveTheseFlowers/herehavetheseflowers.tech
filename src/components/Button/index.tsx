@@ -13,13 +13,14 @@ export function Button(props: ButtonProps) {
   );
 }
 
-export const RefButton = React.forwardRef((props: ButtonProps, ref: React.MutableRefObject<any>) => {
-  const { className, children, onClick } = props;
-  const classNames = classnames('button', className);
-  return (
-    <button {...props} className={classNames} onClick={onClick} ref={ref}>
-      {children}
-    </button>
-  )
-}
+export const RefButton = React.forwardRef(
+  (props: ButtonProps, ref: React.MutableRefObject<any>) => {
+    const { className, children, onClick } = props;
+    const classNames = classnames('button', className);
+    return (
+      <button {...props} className={classNames} onClick={onClick} ref={ref}>
+        {children}
+      </button>
+    );
+  }
 );

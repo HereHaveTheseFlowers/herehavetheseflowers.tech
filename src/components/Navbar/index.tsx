@@ -7,108 +7,120 @@ import { Palette } from '../Palette';
 import React from 'react';
 import store from '../../utils/Store';
 import { RouterList } from '../../router/routerList';
-import firestoreController from '../../controllers/firestoreController'
+import firestoreController from '../../controllers/firestoreController';
 import { translateCategory } from '../../pages/Home';
 
 type NavbarProps = {
-    lang: string;
-    category?: string;
-}
+  lang: string;
+  category?: string;
+};
 
 export function Navbar(props: NavbarProps) {
-    const [menuActive, setMenuActive] = useState(false);
-    const [paletteActive, setPaletteActive] = useState(false);
+  const [menuActive, setMenuActive] = useState(false);
+  const [paletteActive, setPaletteActive] = useState(false);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const menuPaletteRef = React.createRef();
-    const menuElementRef = useRef(null);
-    const langSwitcherRef = useRef(null);
+  const menuPaletteRef = React.createRef();
+  const menuElementRef = useRef(null);
+  const langSwitcherRef = useRef(null);
 
-    const categories = store.getState().categories;
+  const categories = store.getState().categories;
 
-    const isMobile: boolean = window.matchMedia('(max-device-width: 480px)').matches;
-    
-    const navigateToCategory = () => {
-        if(!props.category) return
-        navigate(`${location.pathname.includes("/ru") ? "/ru" : ""}/${translateCategory(props.category, "en").replaceAll(" ", "-")}`)
+  const isMobile: boolean = window.matchMedia('(max-device-width: 480px)').matches;
+
+  const navigateToCategory = () => {
+    if (!props.category) return;
+    navigate(
+      `${location.pathname.includes('/ru') ? '/ru' : ''}/${translateCategory(props.category, 'en').replaceAll(' ', '-')}`
+    );
+  };
+
+  const handleMenuButton = () => {
+    if (!menuElementRef.current) return;
+    if (menuActive) {
+      menuElementRef.current.classList.add('menu_state_hidden');
+      setMenuActive(false);
+    } else {
+      menuElementRef.current.classList.remove('menu_state_hidden');
+      setMenuActive(true);
     }
+    document.querySelector('.navbar__menu')?.classList.toggle('active');
+  };
 
-    const handleMenuButton = () => {
-        if(!menuElementRef.current) return;
-        if(menuActive) {
-            menuElementRef.current.classList.add('menu_state_hidden');
-            setMenuActive(false)
-        } else {
-            menuElementRef.current.classList.remove('menu_state_hidden');
-            setMenuActive(true)
-        }
-        document.querySelector('.navbar__menu')?.classList.toggle('active');
-    };
-    
-    const handlePaletteButton = () => {
-        if(!menuPaletteRef.current) return;
-        const palette = menuPaletteRef.current as HTMLDivElement
-        if(paletteActive) {
-            palette.classList.add('palette_state_hidden');
-            setPaletteActive(false)
-        } else {
-            palette.classList.remove('palette_state_hidden');
-            setPaletteActive(true)
-        }
-        document.querySelector('.navbar__palette')?.classList.toggle('active');
-        
-
-    };
-
-    const handleThemeSwitcher = () => {
-        document.querySelector('.themeswitcher__semicircle')?.classList.toggle('active');
-        document.querySelector('.themeswitcher')?.classList.toggle('active');
-        if(store.getState().theme === "dark") {
-            store.set("theme", "light")
-            window.localStorage.setItem("theme", "light");
-        } else {
-            store.set("theme", "dark")
-            window.localStorage.setItem("theme", "dark");
-        }
-    };
-
-    const location = useLocation();
-    const handleLangSwitcher = () => {
-        if(props.lang === "en") {
-            const newPathname = location.pathname === "/" ? "/ru" : "/ru" + location.pathname
-            navigate(newPathname)
-            firestoreController.updateBlocks("ru")
-        } else {
-            const newPathname = location.pathname.replace("/ru", "") === "" ? "/" : location.pathname.replace("/ru", "")
-            navigate(newPathname)
-            firestoreController.updateBlocks("en")
-        }
-        if(!langSwitcherRef.current) return
-        if(langSwitcherRef.current.style.transform) {
-            langSwitcherRef.current.style.transform = ""
-        } else {
-            langSwitcherRef.current.style.transform = "rotate(360deg)"
-        }
+  const handlePaletteButton = () => {
+    if (!menuPaletteRef.current) return;
+    const palette = menuPaletteRef.current as HTMLDivElement;
+    if (paletteActive) {
+      palette.classList.add('palette_state_hidden');
+      setPaletteActive(false);
+    } else {
+      palette.classList.remove('palette_state_hidden');
+      setPaletteActive(true);
     }
+    document.querySelector('.navbar__palette')?.classList.toggle('active');
+  };
 
-    return (
-        <header className="navbar">
-            <div className="navbar__logo" onClick={()=>{navigate(location.pathname.includes("/ru") ? "/ru" : "/")}}>
-                <BouncyText>
-                    { isMobile ? 'HHTF' : 'HereHaveTheseFlowers' }
-                </BouncyText>
-            </div>
-            {props.category && <div className="navbar__category" onClick={navigateToCategory}>• <BouncyText>{props.category}</BouncyText></div>}
-            <div className="navbar__buttons">
-            { !isMobile && 
-                <Button className="navbar__palette">
-                    <span onClick={handlePaletteButton}>{`${props.lang === "ru" ? "ЦВЕТ" : "COLOR"}`}</span>
-                    <Palette ref={menuPaletteRef} />
-                </Button> }
-                <Button className="navbar__menu" onClick={handleMenuButton}>{`${props.lang === "ru" ? "МЕНЮ" : "MENU"}`}</Button>
-                
-                {/* 
+  const handleThemeSwitcher = () => {
+    document.querySelector('.themeswitcher__semicircle')?.classList.toggle('active');
+    document.querySelector('.themeswitcher')?.classList.toggle('active');
+    if (store.getState().theme === 'dark') {
+      store.set('theme', 'light');
+      window.localStorage.setItem('theme', 'light');
+    } else {
+      store.set('theme', 'dark');
+      window.localStorage.setItem('theme', 'dark');
+    }
+  };
+
+  const location = useLocation();
+  const handleLangSwitcher = () => {
+    if (props.lang === 'en') {
+      const newPathname = location.pathname === '/' ? '/ru' : '/ru' + location.pathname;
+      navigate(newPathname);
+      firestoreController.updateBlocks('ru');
+    } else {
+      const newPathname =
+        location.pathname.replace('/ru', '') === '' ? '/' : location.pathname.replace('/ru', '');
+      navigate(newPathname);
+      firestoreController.updateBlocks('en');
+    }
+    if (!langSwitcherRef.current) return;
+    if (langSwitcherRef.current.style.transform) {
+      langSwitcherRef.current.style.transform = '';
+    } else {
+      langSwitcherRef.current.style.transform = 'rotate(360deg)';
+    }
+  };
+
+  return (
+    <header className='navbar'>
+      <div
+        className='navbar__logo'
+        onClick={() => {
+          navigate(location.pathname.includes('/ru') ? '/ru' : '/');
+        }}
+      >
+        <BouncyText>{isMobile ? 'HHTF' : 'HereHaveTheseFlowers'}</BouncyText>
+      </div>
+      {props.category && (
+        <div className='navbar__category' onClick={navigateToCategory}>
+          • <BouncyText>{props.category}</BouncyText>
+        </div>
+      )}
+      <div className='navbar__buttons'>
+        {!isMobile && (
+          <Button className='navbar__palette'>
+            <span onClick={handlePaletteButton}>{`${props.lang === 'ru' ? 'ЦВЕТ' : 'COLOR'}`}</span>
+            <Palette ref={menuPaletteRef} />
+          </Button>
+        )}
+        <Button
+          className='navbar__menu'
+          onClick={handleMenuButton}
+        >{`${props.lang === 'ru' ? 'МЕНЮ' : 'MENU'}`}</Button>
+
+        {/* 
                 <BouncyButton onClick={handlePaletteButton} svgRef={menuPaletteRef}>
                     <div className="palette-button" ref={menuPaletteRef}>
                         <svg style={{display: "none"}}>
@@ -141,36 +153,44 @@ export function Navbar(props: NavbarProps) {
                         </svg>
                     </div>
                 </BouncyButton> */}
-            </div>
+      </div>
 
-            <div className="menu menu_state_hidden" ref={menuElementRef}> 
-                {categories.map((category: string, index: number) => {
-                    return (
-                        <div
-                            key={`${category} name`} 
-                            className={`menu__category ${props.category === category ? 'menu__category_active' : ''}`} 
-                            onClick={()=>{navigate(`${props.lang === "ru" ? "/ru" : ""}/${category.replaceAll(" ", "-")}`)}}
-                        >
-                            <BouncyText>{`${props.lang === "ru" ? translateCategory(category) : category}`}</BouncyText>
-                        </div>
-                    )
-                })}
-                <div className="menu__footer">
-                    { isMobile && 
-                        <Button className="navbar__palette" style={{gridColumn: "1 / span 2", justifySelf: "center"}}>
-                            <span onClick={handlePaletteButton}>{`${props.lang === "ru" ? "ЦВЕТ" : "COLOR"}`}</span>
-                            <Palette ref={menuPaletteRef} />
-                        </Button>
-                    }
-                    <button className="themeswitcher" onClick={handleThemeSwitcher}>
-                        <div className={`themeswitcher__semicircle ${store.getState().theme === "dark" ? "active" : ""}`} />
-                    </button>
-                    <button className="langswitcher" onClick={handleLangSwitcher} ref={langSwitcherRef}>
-                        {props.lang.toUpperCase()}
-                    </button>
-                </div>
+      <div className='menu menu_state_hidden' ref={menuElementRef}>
+        {categories.map((category: string, index: number) => {
+          return (
+            <div
+              key={`${category} name`}
+              className={`menu__category ${props.category === category ? 'menu__category_active' : ''}`}
+              onClick={() => {
+                navigate(`${props.lang === 'ru' ? '/ru' : ''}/${category.replaceAll(' ', '-')}`);
+              }}
+            >
+              <BouncyText>{`${props.lang === 'ru' ? translateCategory(category) : category}`}</BouncyText>
             </div>
-        </header>
-    );
+          );
+        })}
+        <div className='menu__footer'>
+          {isMobile && (
+            <Button
+              className='navbar__palette'
+              style={{ gridColumn: '1 / span 2', justifySelf: 'center' }}
+            >
+              <span
+                onClick={handlePaletteButton}
+              >{`${props.lang === 'ru' ? 'ЦВЕТ' : 'COLOR'}`}</span>
+              <Palette ref={menuPaletteRef} />
+            </Button>
+          )}
+          <button className='themeswitcher' onClick={handleThemeSwitcher}>
+            <div
+              className={`themeswitcher__semicircle ${store.getState().theme === 'dark' ? 'active' : ''}`}
+            />
+          </button>
+          <button className='langswitcher' onClick={handleLangSwitcher} ref={langSwitcherRef}>
+            {props.lang.toUpperCase()}
+          </button>
+        </div>
+      </div>
+    </header>
+  );
 }
-  

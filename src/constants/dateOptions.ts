@@ -1,9 +1,9 @@
 export const dateOptions: Intl.DateTimeFormatOptions = {
-    month: 'short',
-    day: 'numeric',
+  month: 'short',
+  day: 'numeric'
 };
 
 export const dateOptionsBlock: Intl.DateTimeFormatOptions = {
-    month: 'long',
-    day: 'numeric',
+  month: 'long',
+  day: 'numeric'
 };
