@@ -6,7 +6,10 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "paths": {
+      "@/*": ["./src/*"],
+    }
   },
   "files": ["src/index.tsx"],
   "include": ["src/components", "src/custom.d.ts"],
