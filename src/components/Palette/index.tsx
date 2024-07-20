@@ -57,6 +57,7 @@ export const Palette = React.forwardRef((props, ref: any) => {
   const [colorHSL, setColorHSL] = useState(colorHslInitial);
 
   useEffect(() => {
+
     //Runs only on the first render
     if (window.localStorage.getItem('mainColor')) {
       colorHexInitial = window.localStorage.getItem('mainColor');
@@ -112,6 +113,7 @@ export const Palette = React.forwardRef((props, ref: any) => {
       htmlElem.style.setProperty('--color-bg', hexBGSwitched);
     }
   });
+
 
   const handleChangeHSL = (e: any) => {
     setColorHSL({ h: e.h, s: e.s, l: defaultStatsMain.lightness });

@@ -55,6 +55,12 @@ export function SaturationColorPicker(props: SaturationColorPickerProps) {
       pickerElement.current.addEventListener('mousedown', (e: PointerEvent) => {
         handleChangeColor(e, true);
       });
+      pickerElement.current.addEventListener('touchend', (e: PointerEvent) => {
+        handleChangeColor(e, true);
+      });
+
+
+      
     }
   }, []);
   return (

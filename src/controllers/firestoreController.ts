@@ -1,11 +1,9 @@
 import store from '../utils/Store';
 import { initializeApp } from 'firebase/app';
-//import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite';
 import type { Firestore, DocumentData } from 'firebase/firestore/lite';
 import type { FirebaseApp } from 'firebase/app';
 import type { BlockProps } from '../components/BlockGrid';
-import { useLocation } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAJsmH1fEop_sRciw988ElrUGJnJJMgmiY',
