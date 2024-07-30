@@ -54,7 +54,7 @@ export default function Home() {
   const selectedLang = location.pathname.includes('/ru') === true ? 'ru' : 'en';
 
   useEffect(() => {
-    colorC.changeColor('#1e8e42')
+    colorC.changeColor('#1e8e42');
     firestoreController.updateBlocks(selectedLang);
   }, []);
 

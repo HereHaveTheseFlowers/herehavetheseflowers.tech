@@ -170,12 +170,10 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
   } else {
     return (
       <div className='block block_state_loaded'>
-      <div className='block__overlay' onClick={navigateToBlockPage}></div>
+        <div className='block__overlay' onClick={navigateToBlockPage}></div>
         <div className='block__status'>
           <a className='block__category' onClick={navigateToBlockCategory}>
-            <span className='block__category-span'>
-              {category}
-            </span>
+            <span className='block__category-span'>{category}</span>
           </a>
           {pinned && (
             <svg className='block__pinned' viewBox='0 0 800 799.83'>
@@ -209,13 +207,12 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
             src={thumbnailURL}
             alt={`${name} thumbnail`}
             onLoad={() => {
-              imageSkeletonRef.current.remove()
-              imageRef.current.classList.remove('image_state_unloaded')
-              imageRef.current.classList.add('image_state_loaded')
+              imageSkeletonRef.current.remove();
+              imageRef.current.classList.remove('image_state_unloaded');
+              imageRef.current.classList.add('image_state_loaded');
             }}
           />
           <div ref={imageSkeletonRef} className=' block__thumbnail-image skeleton-image' />
-
         </div>
         <span className='block__name underlined' onClick={navigateToBlockPage}>
           {name}

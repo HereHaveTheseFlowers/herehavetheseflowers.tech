@@ -36,8 +36,8 @@ export default function Block() {
   if (currentBlock) {
     const { date, name, thumbnailURL, website, content, github, color } = currentBlock;
 
-    colorC.changeColor(color)
-    
+    colorC.changeColor(color);
+
     const contentArray = content.split('[br]');
 
     let displayedDate = '---';

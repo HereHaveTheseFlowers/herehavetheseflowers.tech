@@ -1,4 +1,3 @@
-
 export const defaultStatsBGLight = {
   saturation: 4,
   lightness: 96
