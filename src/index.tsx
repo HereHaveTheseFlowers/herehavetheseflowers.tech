@@ -8,8 +8,10 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import firestoreController from './controllers/firestoreController';
+import colorC from './controllers/colorController';
 
 const controller = firestoreController;
+const colorController = colorC;
 
 window.addEventListener('DOMContentLoaded', () => {
   let loader = document.querySelector('.loader') as HTMLElement;

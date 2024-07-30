@@ -20,28 +20,12 @@
     display: flex
     flex-direction: column
     align-items: flex-start
+    color: $color-bg !important
     @media screen and (max-width: $breakpoint-tablet)
         flex-basis: calc(50% - $margin-normal)
         height: 345px
     @media screen and (max-width: $breakpoint-phone)
         flex-basis: 100%
-    &:after
-        content: " "
-        position: absolute
-        top: 0
-        left: 0
-        width: 100%
-        height: 100%
-        opacity: $opacity-none
-        transition: 0.2s opacity
-        pointer-events: none
-        border-radius: 16px
-        z-index: 100
-        mix-blend-mode: hue
-        animation: 0.8s ease 1 overlayfadein
-    &:hover:after
-        background: $color-main
-        opacity: $opacity-strong
     &:before
         content: " "
         position: absolute
@@ -55,7 +39,7 @@
         border-style: solid
         border-width: $border-normal
         border-color: $color-main
-        transition: 0.5s color, 0.5s border-color, 0.2s opacity, 0.1s border-width ease
+        transition: $transition-color color, $transition-color border-color, 0.2s opacity, 0.1s border-width ease
         pointer-events: none
     &:hover:before
         border-width: $border-strong
@@ -66,7 +50,7 @@
     position: relative
     display: flex
     color: $color-main
-    transition: .5s color
+    transition: $transition-color color
     line-height: 14px
     flex: none
     align-items: center
@@ -75,7 +59,7 @@
     cursor: pointer
     height: 100%
     fill: $color-main
-    transition: .5s fill
+    transition: $transition-color fill
     animation: ring 4s .7s ease-in-out infinite
 
 .block__notification-text
@@ -87,7 +71,7 @@
 .block__pinned
     height: 80%
     fill: $color-main
-    transition: .5s fill
+    transition: $transition-color fill
     margin-left: $margin-petite
     pointer-events: none
 
@@ -118,7 +102,7 @@
         opacity: 0
         z-index: -1
         background-color: $color-main
-        transition: 0.5s background-color, 0.2s opacity
+        transition: $transition-color background-color, 0.2s opacity
     &:hover:before
         opacity: $opacity-smallest
 

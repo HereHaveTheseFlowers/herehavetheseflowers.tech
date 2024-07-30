@@ -53,7 +53,4 @@ export class firestoreController {
 
 const controller = new firestoreController();
 
-// @ts-ignore REMOVE THIS ON PROD
-window.firestoreController = controller;
-
 export default controller;

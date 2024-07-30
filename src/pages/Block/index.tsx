@@ -6,6 +6,7 @@ import { translateCategory } from '../Home';
 import type { BlockProps } from '../../components/BlockGrid';
 import store from '../../utils/Store';
 import { dateOptionsBlock } from '../../constants/dateOptions';
+import colorC from '../../controllers/colorController';
 
 export default function Block() {
   const location = useLocation();
@@ -33,8 +34,10 @@ export default function Block() {
   }
 
   if (currentBlock) {
-    const { date, name, thumbnailURL, website, content, github } = currentBlock;
+    const { date, name, thumbnailURL, website, content, github, color } = currentBlock;
 
+    colorC.changeColor(color)
+    
     const contentArray = content.split('[br]');
 
     let displayedDate = '---';

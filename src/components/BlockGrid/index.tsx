@@ -1,10 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button } from '../Button';
-import React from 'react';
 import store from '../../utils/Store';
-import { RouterList } from '../../router/routerList';
-import firestoreController from '../../controllers/firestoreController';
 import { translateCategory } from '../../pages/Home';
 import { dateOptions } from '../../constants/dateOptions';
 
@@ -87,6 +83,7 @@ export type BlockProps = {
   pinned: boolean;
   id: string;
   website: string;
+  color: string;
 };
 
 export type BlockPreviewProps = {
@@ -110,6 +107,8 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
   const handleImageLoaded = () => {
     setImageLoading(false);
   };
+  const imageSkeletonRef = useRef(null);
+  const imageRef = useRef(null);
 
   if (date) {
     const blockDate = new Date(date.seconds * 1000);
@@ -168,12 +167,13 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
         <span className='block__description skeleton-box'>{'\xa0'}</span>
       </div>
     );
-  } else if (name && imageLoading) {
+  } else {
     return (
       <div className='block block_state_loaded'>
+      <div className='block__overlay' onClick={navigateToBlockPage}></div>
         <div className='block__status'>
-          <a className='block__category'>
-            <span className='block__category-span' onClick={navigateToBlockCategory}>
+          <a className='block__category' onClick={navigateToBlockCategory}>
+            <span className='block__category-span'>
               {category}
             </span>
           </a>
@@ -204,24 +204,26 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
         </div>
         <div className='block__thumbnail' onClick={navigateToBlockPage}>
           <img
+            ref={imageRef}
             className='block__thumbnail-image image_state_unloaded'
             src={thumbnailURL}
             alt={`${name} thumbnail`}
             onLoad={() => {
-              handleImageLoaded();
+              imageSkeletonRef.current.remove()
+              imageRef.current.classList.remove('image_state_unloaded')
+              imageRef.current.classList.add('image_state_loaded')
             }}
           />
-          <div className=' block__thumbnail-image skeleton-image' />
-          <div className='block__overlay' />
+          <div ref={imageSkeletonRef} className=' block__thumbnail-image skeleton-image' />
+
         </div>
         <span className='block__name underlined' onClick={navigateToBlockPage}>
           {name}
         </span>
         <span className='block__description'>{description}</span>
-        <div className='block__overlay' onClick={navigateToBlockPage}></div>
       </div>
     );
-  } else {
+  } /* else {
     return (
       <div className='block block_state_loaded'>
         <div className='block__overlay' onClick={navigateToBlockPage}></div>
@@ -275,5 +277,5 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
         <span className='block__description'>{description}</span>
       </div>
     );
-  }
+  } */
 };

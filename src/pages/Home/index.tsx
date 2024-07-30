@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { Button, Navbar, BlockGrid } from '../../components';
 import firestoreController from '../../controllers/firestoreController';
+import colorC from '../../controllers/colorController';
 
 export function translateCategory(category: string, translateTo = 'ru') {
   let translatedCategory = category;
@@ -47,11 +48,13 @@ export function translateCategory(category: string, translateTo = 'ru') {
 
 export default function Home() {
   const location = useLocation();
+  const homeColor = '';
   let { category } = useParams();
   if (category) category = category.replaceAll('-', ' ');
   const selectedLang = location.pathname.includes('/ru') === true ? 'ru' : 'en';
 
   useEffect(() => {
+    colorC.changeColor('#1e8e42')
     firestoreController.updateBlocks(selectedLang);
   }, []);
 

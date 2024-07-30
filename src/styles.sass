@@ -5,8 +5,6 @@
 @import './components/BouncyButton/styles.sass'
 @import './components/Button/styles.sass'
 @import './components/Input/styles.sass'
-@import './components/SaturationColorPicker/styles.sass'
-@import './components/Palette/styles.sass'
 @import './components/BlockGrid/styles.sass'
 
 @import './utils/skeleton.sass'
@@ -19,11 +17,11 @@ html
     background-color: $color-bg
     scrollbar-color: $color-main $color-bg
     scrollbar-width: thin
-    transition: color .5s, scrollbar-color .5s, background-color .5s
+    transition: color $transition-color, scrollbar-color $transition-color, background-color $transition-color
     overflow: overlay
 
 *
-    transition: color .5s, border-color .5s
+    transition: color $transition-color, border-color $transition-color
 
 span
     color: $color-main

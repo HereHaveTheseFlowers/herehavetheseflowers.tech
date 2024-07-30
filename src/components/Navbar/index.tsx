@@ -1,12 +1,9 @@
 import { useRef, useState } from 'react';
 import { BouncyText } from '../BouncyText';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BouncyButton } from '../BouncyButton';
 import { Button } from '../Button';
-import { Palette } from '../Palette';
 import React from 'react';
 import store from '../../utils/Store';
-import { RouterList } from '../../router/routerList';
 import firestoreController from '../../controllers/firestoreController';
 import { translateCategory } from '../../pages/Home';
 
@@ -109,12 +106,6 @@ export function Navbar(props: NavbarProps) {
         </div>
       )}
       <div className='navbar__buttons'>
-        {!isMobile && (
-          <Button className='navbar__palette'>
-            <span onClick={handlePaletteButton}>{`${props.lang === 'ru' ? 'ЦВЕТ' : 'COLOR'}`}</span>
-            <Palette ref={menuPaletteRef} />
-          </Button>
-        )}
         <Button
           className='navbar__menu'
           onClick={handleMenuButton}
@@ -170,17 +161,6 @@ export function Navbar(props: NavbarProps) {
           );
         })}
         <div className='menu__footer'>
-          {isMobile && (
-            <Button
-              className='navbar__palette'
-              style={{ gridColumn: '1 / span 2', justifySelf: 'center' }}
-            >
-              <span
-                onClick={handlePaletteButton}
-              >{`${props.lang === 'ru' ? 'ЦВЕТ' : 'COLOR'}`}</span>
-              <Palette ref={menuPaletteRef} />
-            </Button>
-          )}
           <button className='themeswitcher' onClick={handleThemeSwitcher}>
             <div
               className={`themeswitcher__semicircle ${store.getState().theme === 'dark' ? 'active' : ''}`}

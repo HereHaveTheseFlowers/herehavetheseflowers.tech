@@ -8,7 +8,7 @@
     background-color: $color-bg
     z-index: $z-header
     border-bottom: $border-normal solid $color-main
-    transition: 0.5s border-color, 0.5s background-color
+    transition: $transition-color border-color, $transition-color background-color
 
 .navbar__logo
     font-size: $font-big
@@ -17,7 +17,7 @@
 .navbar__category
     font-size: $font-normal
     color: $color-main
-    transition: 0.5s color
+    transition: $transition-color color
     padding-left: $margin-little
     align-self: center
     cursor: pointer
@@ -48,7 +48,7 @@
     border-left-width: $border-normal
     border-left-style: solid
     z-index: $z-menu
-    transition: .5s border-color, .5s color, .2s width, .2s opacity, .5s background-color
+    transition: $transition-color border-color, $transition-color color, .2s width, .2s opacity, $transition-color background-color
     @media screen and (max-width: $breakpoint-phone)
         width: 50vw
 
@@ -91,14 +91,14 @@
     position: relative
     overflow: hidden
     color: $color-main
-    transition: $transition-color color, .5s transform
+    transition: $transition-color color, $transition-color transform
     &::after
         content: ""
         border-color: $color-main
         border-style: solid
         border-width: $border-normal
         border-radius: 50%
-        transition: .5s border-color
+        transition: $transition-color border-color
         outline: none
         position: absolute
         width: 100%
@@ -124,7 +124,7 @@
         border-style: solid
         border-width: $border-normal
         border-radius: 50%
-        transition: .5s border-color
+        transition: $transition-color border-color
         outline: none
         position: absolute
         width: 100%
@@ -138,7 +138,7 @@
     width: 100%
     height: 50%
     background-color: $color-main
-    transition: transform .5s, background-color .5s
+    transition: transform $transition-color, background-color $transition-color
     position: absolute
     top: 0
     transform: translate(-19%, 14%) rotate(135deg)
