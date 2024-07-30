@@ -167,7 +167,7 @@ export function Navbar(props: NavbarProps) {
             />
           </button>
           <button className='langswitcher' onClick={handleLangSwitcher} ref={langSwitcherRef}>
-            {props.lang.toUpperCase()}
+            {props.lang === 'ru' ? 'EN' : 'RU'}
           </button>
         </div>
       </div>
