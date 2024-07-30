@@ -1,19 +1,15 @@
 .blockgrid
-    width: 90%
+    width: 100%
     display: flex
     flex-wrap: wrap
-    padding: $margin-normal $margin-normal $margin-normal calc($margin-normal + $margin-normal)
-    gap: $margin-normal
-    @media screen and (max-width: $breakpoint-tablet)
-        padding: $margin-small 0
-        margin-left: $margin-normal
-        gap: $margin-small
+    padding: $margin-normal 0
+    justify-content: space-between
     @media screen and (max-width: $breakpoint-phone)
         margin-left: 0
 
 .block
     height: 400px
-    flex-basis: calc(33.333% - $margin-normal)
+    flex-basis: calc(33.333% - 24px)
     position: relative
     padding: $margin-small
     overflow: hidden
@@ -21,8 +17,9 @@
     flex-direction: column
     align-items: flex-start
     color: $color-bg !important
+    margin-bottom: $margin-normal
     @media screen and (max-width: $breakpoint-tablet)
-        flex-basis: calc(50% - $margin-normal)
+        flex-basis: calc(50% - 18px)
         height: 345px
     @media screen and (max-width: $breakpoint-phone)
         flex-basis: 100%
@@ -78,6 +75,7 @@
 .block__date
     cursor: pointer
     margin-left: auto
+    text-align: right
 
 .block__category
     position: relative
