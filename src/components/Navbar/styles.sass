@@ -3,9 +3,9 @@
     display: flex
     padding-bottom: $margin-small
     padding-top: $margin-normal
-    position: sticky
+    position: relative
     top: 0
-    background-color: $color-bg
+    //background-color: $color-bg
     z-index: $z-header
     border-bottom: $border-normal solid $color-main
     transition: $transition-color border-color, $transition-color background-color
@@ -91,7 +91,7 @@
     position: relative
     overflow: hidden
     color: $color-main
-    transition: $transition-color color, $transition-color transform
+    transition: $transition-color color, 0.5s transform
     &::after
         content: ""
         border-color: $color-main

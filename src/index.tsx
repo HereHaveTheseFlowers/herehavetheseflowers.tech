@@ -46,6 +46,28 @@ window.addEventListener('resize', documentHeight);
   document.documentElement?.style.setProperty('--color-main', '#fff');
 }, 3000); */
 
+(() => {
+  let oldPushState = history.pushState;
+  history.pushState = function pushState() {
+    let ret = oldPushState.apply(this, arguments);
+    window.dispatchEvent(new Event('pushstate'));
+    window.dispatchEvent(new Event('colorchange'));
+    return ret;
+  };
+
+  let oldReplaceState = history.replaceState;
+  history.replaceState = function replaceState() {
+    let ret = oldReplaceState.apply(this, arguments);
+    window.dispatchEvent(new Event('replacestate'));
+    window.dispatchEvent(new Event('colorchange'));
+    return ret;
+  };
+
+  window.addEventListener('popstate', () => {
+    window.dispatchEvent(new Event('colorchange'));
+  });
+})();
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
