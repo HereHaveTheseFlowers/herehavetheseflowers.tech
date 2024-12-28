@@ -22,8 +22,6 @@
         height: 345px
     @media screen and (max-width: $breakpoint-phone)
         flex-basis: 100%
-    &:hover
-        transform: scale(1.1)
     &:after
         content: " "
         position: absolute
@@ -36,7 +34,7 @@
         z-index: -1
         transition: $transition-color color, $transition-color border-color, 0.2s opacity
     &:hover::after
-        opacity: 0.03
+        opacity: 0.08
     &:before
         content: " "
         position: absolute
