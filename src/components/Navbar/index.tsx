@@ -116,7 +116,7 @@ export function Navbar(props: NavbarProps) {
           />
         </button>
         <button className='langswitcher' onClick={handleLangSwitcher} ref={langSwitcherRef}>
-          {props.lang === 'ru' ? 'EN' : 'RU'}
+          <span className='langswitcher__span'>{props.lang === 'ru' ? 'EN' : 'RU'}</span>
         </button>
       </div>
     </header>
