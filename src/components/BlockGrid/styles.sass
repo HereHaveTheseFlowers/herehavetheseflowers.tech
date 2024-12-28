@@ -3,7 +3,7 @@
     display: flex
     flex-wrap: wrap
     padding: $margin-normal 0
-    justify-content: space-between
+    gap: $margin-normal
     @media screen and (max-width: $breakpoint-phone)
         margin-left: 0
 
@@ -57,6 +57,7 @@
     fill: $color-main
     transition: $transition-color fill
     animation: ring 4s .7s ease-in-out infinite
+    margin-left: $margin-petite
 
 .block__notification-text
     cursor: pointer
