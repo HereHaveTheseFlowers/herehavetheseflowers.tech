@@ -105,7 +105,6 @@
         left: 0
 
 .langswitcher__span
-    transform: translateY(1px)
     display: block
 
 .themeswitcher
@@ -118,7 +117,7 @@
     position: relative
     overflow: hidden
     border-radius: 50%
-    transition: 0.8s transform
+    transition: 0.5s transform
     justify-self: end
     &::after
         content: ""
@@ -134,13 +133,13 @@
         top: 0
         left: 0
     &.active
-        transform: rotate(360deg)
+        transform: rotate(180deg)
         
 .themeswitcher__semicircle
     width: 100%
     height: 50%
     background-color: $color-main
-    transition: transform 0.3s, background-color $transition-color
+    transition: transform $transition-color, background-color $transition-color
     position: absolute
     top: 0
     transform: translate(-19%, 14%) rotate(135deg)
