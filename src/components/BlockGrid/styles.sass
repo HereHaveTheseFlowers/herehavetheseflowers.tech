@@ -36,7 +36,7 @@
     &:before
         content: " "
         position: absolute
-        opacity: 0.5
+        opacity: $opacity-half
         top: 0
         left: 0
         width: 100%
@@ -46,10 +46,12 @@
         border-style: solid
         border-width: $border-normal
         border-color: $color-main
-        transition: $transition-color color, $transition-color border-color, 0.2s opacity, 0.1s border-width ease
+        transition: $transition-color color, $transition-color border-color, 0.1s opacity, 0.1s border-width ease
         pointer-events: none
     &:hover:before
         opacity: $opacity-full
+        @media screen and (max-width: $breakpoint-phone)
+            opacity: $opacity-half
 
 .block__status
     width: 100%
@@ -62,7 +64,6 @@
     flex: none
     align-items: center
     @media screen and (max-width: $breakpoint-phone)
-        //height: calc($font-standard + $margin-petite * 2)
         font-size: $font-standard
 
 

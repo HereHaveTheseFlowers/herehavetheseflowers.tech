@@ -78,8 +78,8 @@ export default function Block() {
               <div className='block-article__name'>
                 {name} <br />
                 {website && (
-                  <a className='block-article__link' href={website} target='_blank'>
-                    {website.replace('https://', '')}
+                  <a className='block-article__link underlined' href={website} target='_blank'>
+                    {website.replace('https://', '') + ' ↗'}
                   </a>
                 )}
               </div>
@@ -95,8 +95,8 @@ export default function Block() {
                 })}
 
                 {github && (
-                  <a className='block-article__github' href={github} target='_blank'>
-                    {`${location.pathname.includes('/ru') === true ? 'ссылка на репо' : 'github repo'}`}
+                  <a className='block-article__github underlined' href={github} target='_blank'>
+                    {`${location.pathname.includes('/ru') === true ? 'ссылка на репо ↗' : 'github repo ↗'}`}
                   </a>
                 )}
               </div>
@@ -104,14 +104,14 @@ export default function Block() {
                 <div className='block-article__category'>
                   <span
                     className='block-article__category-span underlined'
-                    onClick={navigateToBlockCategory}
-                  >
+                    onClick={navigateToBlockCategory}>
                     {`${location.pathname.includes('/ru') === true ? 'категория' : 'category'}`}:{' '}
                     {category}
                   </span>
                 </div>
                 <div className='block-article__date'>
-                  { isMobile ?  '' : `\xa0|\xa0`}{`${location.pathname.includes('/ru') === true ? 'когда' : 'when'}`}:{' '}
+                  {isMobile ? '' : `\xa0|\xa0`}
+                  {`${location.pathname.includes('/ru') === true ? 'когда' : 'when'}`}:{' '}
                   {displayedDate.toLowerCase()}
                 </div>
               </div>
@@ -165,8 +165,7 @@ export default function Block() {
                 <div className='block-article__category'>
                   <span
                     className='block-article__category-span underlined'
-                    onClick={navigateToBlockCategory}
-                  >
+                    onClick={navigateToBlockCategory}>
                     {`${location.pathname.includes('/ru') === true ? 'категория' : 'category'}`}:{' '}
                     {category} | {'\xa0'}
                   </span>

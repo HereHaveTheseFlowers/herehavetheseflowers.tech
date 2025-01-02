@@ -27,7 +27,7 @@
         background-color: $color-main
         transition: $transition-color background-color, 0.2s opacity
     &:hover:before
-        opacity: $opacity-smallest
+        opacity: $opacity-small
     &:after
         content: " "
         position: absolute
@@ -39,10 +39,10 @@
         border: $border-small solid #000
         pointer-events: none
     &:hover:after
-        opacity: $opacity-smallest
+        opacity: $opacity-small
         
 .button.active
     &:after
-        opacity: $opacity-smallest
+        opacity: $opacity-small
     &::before
         opacity: $opacity-medium
