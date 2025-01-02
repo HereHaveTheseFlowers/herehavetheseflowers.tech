@@ -1,7 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Loader } from '../components';
-import { withPrivateRoute } from './withPrivateRoute';
 import { RouterList } from './routerList';
 
 import HomePage from '../pages/Home';

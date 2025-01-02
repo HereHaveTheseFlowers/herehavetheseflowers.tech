@@ -1,6 +1,4 @@
-//import './assets/fonts/fonts.css';
 import './utils/modern-normalize.css';
-import './constants/fonts.css';
 import './styles.sass';
 import 'core-js/stable';
 import React from 'react';
@@ -8,8 +6,10 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import firestoreController from './controllers/firestoreController';
+import colorC from './controllers/colorController';
 
 const controller = firestoreController;
+const colorController = colorC;
 
 window.addEventListener('DOMContentLoaded', () => {
   let loader = document.querySelector('.loader') as HTMLElement;
@@ -43,6 +43,28 @@ window.addEventListener('resize', documentHeight);
   document.documentElement?.style.setProperty('--color-bg', '#000');
   document.documentElement?.style.setProperty('--color-main', '#fff');
 }, 3000); */
+
+(() => {
+  let oldPushState = history.pushState;
+  history.pushState = function pushState() {
+    let ret = oldPushState.apply(this, arguments);
+    window.dispatchEvent(new Event('pushstate'));
+    window.dispatchEvent(new Event('colorchange'));
+    return ret;
+  };
+
+  let oldReplaceState = history.replaceState;
+  history.replaceState = function replaceState() {
+    let ret = oldReplaceState.apply(this, arguments);
+    window.dispatchEvent(new Event('replacestate'));
+    window.dispatchEvent(new Event('colorchange'));
+    return ret;
+  };
+
+  window.addEventListener('popstate', () => {
+    window.dispatchEvent(new Event('colorchange'));
+  });
+})();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

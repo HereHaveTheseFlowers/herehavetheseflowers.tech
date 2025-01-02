@@ -2,11 +2,8 @@
 
 @import './components/Navbar/styles.sass'
 @import './components/BouncyText/styles.sass'
-@import './components/BouncyButton/styles.sass'
 @import './components/Button/styles.sass'
 @import './components/Input/styles.sass'
-@import './components/SaturationColorPicker/styles.sass'
-@import './components/Palette/styles.sass'
 @import './components/BlockGrid/styles.sass'
 
 @import './utils/skeleton.sass'
@@ -19,27 +16,36 @@ html
     background-color: $color-bg
     scrollbar-color: $color-main $color-bg
     scrollbar-width: thin
-    transition: color .5s, scrollbar-color .5s, background-color .5s
+    transition: color $transition-color, scrollbar-color $transition-color, background-color $transition-color
     overflow: overlay
 
-*
-    transition: color .5s, border-color .5s
-
-span
-    color: $color-main
 
 body
     margin: 0 $margin-normal $margin-normal $margin-normal
     padding: 0
     min-height: calc(var(--doc-height) - $margin-normal * 2)
+    text-rendering: optimizeLegibility
 
 .app
     display: flex
     flex-direction: column
     align-items: center
 
+:root
+    font-family: Inter, sans-serif
+    font-feature-settings: 'liga' 1, 'calt' 1
+
+@supports (font-variation-settings: normal)
+    :root
+        font-family: InterVariable, sans-serif
+
+*
+    transition: color $transition-color, border-color $transition-color
+
+span
+    color: $color-main
+
 div#root
-    font-family: 'Gilroy', Helvetica, sans-serif
     -webkit-font-smoothing: antialiased
     font-weight: normal
     font-style: normal
@@ -92,3 +98,8 @@ html::-webkit-scrollbar-thumb
 /* set button(top and bottom of the scrollbar) */
 html::-webkit-scrollbar-button
     display: none
+
+.react-p5-wrapper
+    position: fixed
+    top: 0
+    z-index: -20

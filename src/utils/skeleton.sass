@@ -76,7 +76,8 @@ $skeleton-bg-opacity: 0.075
     animation: 0.6s ease 1 fadein
 
 .block_state_loaded
-    animation: 0.4s ease 1 blockfadein
+    animation: 0.8s ease 1 blockfadein
+    color: $color-main !important
 
 @keyframes fadein
   0%
@@ -88,9 +89,9 @@ $skeleton-bg-opacity: 0.075
 
 @keyframes blockfadein
   0%
-    opacity: 0.5
+    filter: blur(3px)
   100%
-    opacity: 1
+    filter: blur(0px)
 
 @keyframes skeletonfadein
   0%

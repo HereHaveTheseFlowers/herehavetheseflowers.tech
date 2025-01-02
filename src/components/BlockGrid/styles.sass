@@ -1,64 +1,55 @@
 .blockgrid
-    width: 90%
+    width: 100%
     display: flex
     flex-wrap: wrap
-    padding: $margin-normal $margin-normal $margin-normal calc($margin-normal + $margin-normal)
+    padding: $margin-normal 0
     gap: $margin-normal
-    @media screen and (max-width: $breakpoint-tablet)
-        padding: $margin-small 0
-        margin-left: $margin-normal
-        gap: $margin-small
     @media screen and (max-width: $breakpoint-phone)
         margin-left: 0
 
 .block
-    height: 400px
-    flex-basis: calc(33.333% - $margin-normal)
+    min-height: 400px
+    flex-basis: calc(33.333% - 21.5px)
     position: relative
-    padding: $margin-small
-    overflow: hidden
+    padding:  $margin-small $margin-small $margin-normal $margin-small
     display: flex
     flex-direction: column
     align-items: flex-start
+    color: $color-bg !important
+    transition: $transition-color color, $transition-color border-color, 0.2s opacity, 0.1s transform ease
     @media screen and (max-width: $breakpoint-tablet)
-        flex-basis: calc(50% - $margin-normal)
-        height: 345px
+        flex-basis: calc(50% - 18px)
+        min-height: 345px
     @media screen and (max-width: $breakpoint-phone)
         flex-basis: 100%
     &:after
         content: " "
         position: absolute
-        top: 0
-        left: 0
-        width: 100%
-        height: 100%
-        opacity: $opacity-none
-        transition: 0.2s opacity
-        pointer-events: none
-        border-radius: 16px
-        z-index: 100
-        mix-blend-mode: hue
-        animation: 0.8s ease 1 overlayfadein
-    &:hover:after
         background: $color-main
-        opacity: $opacity-strong
-    &:before
-        content: " "
-        position: absolute
-        opacity: $opacity-full
+        opacity: .08
         top: 0
         left: 0
         width: 100%
         height: 100%
         z-index: -1
-        border-radius: 16px
+        transition: $transition-color color, $transition-color border-color, 0.2s opacity
+    &:before
+        content: " "
+        position: absolute
+        opacity: 0.5
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        z-index: -1
+        border-radius: 3px
         border-style: solid
         border-width: $border-normal
         border-color: $color-main
-        transition: 0.5s color, 0.5s border-color, 0.2s opacity, 0.1s border-width ease
+        transition: $transition-color color, $transition-color border-color, 0.2s opacity, 0.1s border-width ease
         pointer-events: none
     &:hover:before
-        border-width: $border-strong
+        opacity: $opacity-full
 
 .block__status
     width: 100%
@@ -66,17 +57,22 @@
     position: relative
     display: flex
     color: $color-main
-    transition: .5s color
+    transition: $transition-color color
     line-height: 14px
     flex: none
     align-items: center
+    @media screen and (max-width: $breakpoint-phone)
+        //height: calc($font-standard + $margin-petite * 2)
+        font-size: $font-standard
+
 
 .block__notification
     cursor: pointer
     height: 100%
     fill: $color-main
-    transition: .5s fill
+    transition: $transition-color fill
     animation: ring 4s .7s ease-in-out infinite
+    margin-left: $margin-petite
 
 .block__notification-text
     cursor: pointer
@@ -87,13 +83,14 @@
 .block__pinned
     height: 80%
     fill: $color-main
-    transition: .5s fill
+    transition: $transition-color fill
     margin-left: $margin-petite
     pointer-events: none
 
 .block__date
-    cursor: pointer
     margin-left: auto
+    position: relative
+    text-align: right
 
 .block__category
     position: relative
@@ -102,7 +99,7 @@
     color: $color-main
     transition: $transition-color color, $transition-color border-color
     border-style: solid
-    border-width: $border-normal
+    border-width: 0
     border-color: $color-main
     border-radius: $border-radius-notification
     overflow: hidden
@@ -115,17 +112,35 @@
         left: 0
         width: 100%
         height: 100%
-        opacity: 0
-        z-index: -1
         background-color: $color-main
-        transition: 0.5s background-color, 0.2s opacity
+        opacity: 0.2
+        z-index: -1
+        transition: $transition-color background-color, 0.2s opacity
+    &:after
+        transition: $transition-color background-color, 0.2s opacity
+        border-color: $color-main
+        border-radius: $border-radius-notification
+        border-width: $border-normal
+        border-style: solid
+        content: " "
+        position: absolute
+        opacity: $opacity-none
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+    &:hover:after
+        opacity: $opacity-full
     &:hover:before
-        opacity: $opacity-smallest
+        background-color: $color-bg
+        opacity: 0.08
 
 .block__category-span
     cursor: pointer
     font-size: $font-small
     line-height: calc($font-small + $margin-little * 2)
+    @media screen and (max-width: $breakpoint-phone)
+        font-size: $font-standard
     
 .block__thumbnail
     margin-top: $margin-petite
@@ -162,7 +177,7 @@
     margin-top: $margin-petite
     flex: none
     font-size: $font-normal
-    font-weight: 600
+    font-weight: 700
     margin-left: $margin-little
     cursor: pointer
 

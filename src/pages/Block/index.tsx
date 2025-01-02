@@ -6,6 +6,7 @@ import { translateCategory } from '../Home';
 import type { BlockProps } from '../../components/BlockGrid';
 import store from '../../utils/Store';
 import { dateOptionsBlock } from '../../constants/dateOptions';
+import colorC from '../../controllers/colorController';
 
 export default function Block() {
   const location = useLocation();
@@ -20,6 +21,7 @@ export default function Block() {
     setImageLoading(false);
   };
 
+  const isMobile: boolean = window.matchMedia('(max-device-width: 480px)').matches;
   const selectedLang = location.pathname.includes('/ru') === true ? 'ru' : 'en';
   useEffect(() => {
     firestoreController.updateBlocks(selectedLang);
@@ -33,7 +35,9 @@ export default function Block() {
   }
 
   if (currentBlock) {
-    const { date, name, thumbnailURL, website, content, github } = currentBlock;
+    const { date, name, thumbnailURL, website, content, github, color } = currentBlock;
+
+    colorC.changeColor(color);
 
     const contentArray = content.split('[br]');
 
@@ -103,12 +107,11 @@ export default function Block() {
                     onClick={navigateToBlockCategory}
                   >
                     {`${location.pathname.includes('/ru') === true ? 'категория' : 'category'}`}:{' '}
-                    {category} |
+                    {category}
                   </span>
                 </div>
                 <div className='block-article__date'>
-                  <br />
-                  {`${location.pathname.includes('/ru') === true ? 'когда' : 'when'}`}:{' '}
+                  { isMobile ?  '' : `\xa0|\xa0`}{`${location.pathname.includes('/ru') === true ? 'когда' : 'when'}`}:{' '}
                   {displayedDate.toLowerCase()}
                 </div>
               </div>
@@ -165,11 +168,10 @@ export default function Block() {
                     onClick={navigateToBlockCategory}
                   >
                     {`${location.pathname.includes('/ru') === true ? 'категория' : 'category'}`}:{' '}
-                    {category} |
+                    {category} | {'\xa0'}
                   </span>
                 </div>
                 <div className='block-article__date'>
-                  <br />
                   {`${location.pathname.includes('/ru') === true ? 'когда' : 'when'}`}:{' '}
                   {displayedDate.toLowerCase()}
                 </div>

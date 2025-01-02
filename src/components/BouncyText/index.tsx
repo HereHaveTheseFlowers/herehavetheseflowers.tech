@@ -1,4 +1,4 @@
-import { motion, transform, useAnimationControls } from 'framer-motion';
+import { motion, useAnimationControls } from 'framer-motion';
 import { useState } from 'react';
 
 export function BouncyText(props: React.PropsWithChildren) {
