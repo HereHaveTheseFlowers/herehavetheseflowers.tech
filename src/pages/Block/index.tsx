@@ -35,9 +35,17 @@ export default function Block() {
   }
 
   if (currentBlock) {
-    const { date, name, thumbnailURL, website, content, github, color } = currentBlock;
+    const { date, name, thumbnailURL, website, color } = currentBlock;
+    let content = String(currentBlock.content);
 
     colorC.changeColor(color);
+
+    const linksArray = [];
+
+    while (content.lastIndexOf('[link]') != -1) {
+      linksArray.push(content.slice(content.lastIndexOf('[link]'), content.length));
+      content = content.slice(0, content.lastIndexOf('[link]'));
+    }
 
     const contentArray = content.split('[br]');
 
@@ -61,125 +69,84 @@ export default function Block() {
         `${location.pathname.includes('/ru') ? '/ru' : ''}/${translateCategory(category, 'en').replaceAll(' ', '-')}`
       );
     };
-    if (!imageLoading) {
-      return (
-        <>
-          <Navbar category={category} lang={selectedLang} />
-          <article className='block-article'>
-            <section className='block-article__thumbnail-wrapper'>
-              <img
-                className='block-article__thumbnail-image image_state_loaded'
-                src={thumbnailURL}
-                alt={`${name} thumbnail`}
-                draggable='false'
-              />
-            </section>
-            <section className='block-article__info'>
-              <div className='block-article__name'>
-                {name} <br />
-                {website && (
-                  <a className='block-article__link underlined' href={website} target='_blank'>
-                    {website.replace('https://', '') + ' ↗'}
-                  </a>
-                )}
-              </div>
-              <div className='block-article__content'>
-                {contentArray.map((paragraph: string, index: number) => {
+    return (
+      <>
+        <Navbar category={category} lang={selectedLang} />
+        <article className='block-article'>
+          <section className='block-article__thumbnail-wrapper'>
+            <img
+              className={`block-article__thumbnail-image ${imageLoading ? 'image_state_unloaded' : 'image_state_loaded'}`}
+              src={thumbnailURL}
+              alt={`${name} thumbnail`}
+              draggable='false'
+              onLoad={() => {
+                handleImageLoaded();
+              }}
+            />
+            {imageLoading && <div className='block-article__thumbnail-image skeleton-image' />}
+          </section>
+          <section className='block-article__info'>
+            <div className='block-article__name'>
+              {name} <br />
+              {website && (
+                <a
+                  className='block-article__website-link underlined'
+                  href={website}
+                  target='_blank'>
+                  {website.replace('https://', '') + ' ↗'}
+                </a>
+              )}
+            </div>
+            <div className='block-article__content'>
+              {contentArray.map((paragraph: string, index: number) => {
+                const isFirstChild = index === 0 ? true : false;
+                return (
+                  <span key={index}>
+                    {!isFirstChild && (
+                      <>
+                        <br />
+                        <br />
+                      </>
+                    )}
+                    {paragraph}
+                  </span>
+                );
+              })}
+
+              {linksArray &&
+                linksArray.map((link: string, index: number) => {
                   return (
-                    <span key={index}>
-                      {paragraph}
+                    <div key={index}>
+                      <a
+                        className='block-article__content-link underlined'
+                        href={link.slice(link.indexOf('(') + 1, link.indexOf(';'))}
+                        target='_blank'>
+                        {`${link.slice(link.indexOf(';') + 1, link.indexOf(')'))} ↗`}
+                      </a>
                       <br />
                       <br />
-                    </span>
+                    </div>
                   );
                 })}
-
-                {github && (
-                  <a className='block-article__github underlined' href={github} target='_blank'>
-                    {`${location.pathname.includes('/ru') === true ? 'ссылка на репо ↗' : 'github repo ↗'}`}
-                  </a>
-                )}
+            </div>
+            <div className='block-article__footer'>
+              <div className='block-article__category'>
+                <span
+                  className='block-article__category-span underlined'
+                  onClick={navigateToBlockCategory}>
+                  {`${location.pathname.includes('/ru') === true ? 'категория' : 'category'}`}:{' '}
+                  {category} | {'\xa0'}
+                </span>
               </div>
-              <div className='block-article__footer'>
-                <div className='block-article__category'>
-                  <span
-                    className='block-article__category-span underlined'
-                    onClick={navigateToBlockCategory}>
-                    {`${location.pathname.includes('/ru') === true ? 'категория' : 'category'}`}:{' '}
-                    {category}
-                  </span>
-                </div>
-                <div className='block-article__date'>
-                  {isMobile ? '' : `\xa0|\xa0`}
-                  {`${location.pathname.includes('/ru') === true ? 'когда' : 'when'}`}:{' '}
-                  {displayedDate.toLowerCase()}
-                </div>
+              <div className='block-article__date'>
+                {`${location.pathname.includes('/ru') === true ? 'когда' : 'when'}`}:{' '}
+                {displayedDate.toLowerCase()}
               </div>
-            </section>
-          </article>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Navbar category={category} lang={selectedLang} />
-          <article className='block-article'>
-            <section className='block-article__thumbnail-wrapper'>
-              <img
-                className='block-article__thumbnail-image image_state_unloaded'
-                src={thumbnailURL}
-                alt={`${name} thumbnail`}
-                onLoad={() => {
-                  handleImageLoaded();
-                }}
-              />
-              <div className='block-article__thumbnail-image skeleton-image' />
-            </section>
-            <section className='block-article__info'>
-              <div className='block-article__name'>
-                {name} <br />
-                {website && (
-                  <a className='block-article__link' href={website} target='_blank'>
-                    {website.replace('https://', '')}
-                  </a>
-                )}
-              </div>
-              <div className='block-article__content'>
-                {contentArray.map((paragraph: string, index: number) => {
-                  return (
-                    <span key={index}>
-                      {paragraph}
-                      <br />
-                      <br />
-                    </span>
-                  );
-                })}
-
-                {github && (
-                  <a className='block-article__github' href={github} target='_blank'>
-                    {`${location.pathname.includes('/ru') === true ? 'ссылка на репо' : 'github repo'}`}
-                  </a>
-                )}
-              </div>
-              <div className='block-article__footer'>
-                <div className='block-article__category'>
-                  <span
-                    className='block-article__category-span underlined'
-                    onClick={navigateToBlockCategory}>
-                    {`${location.pathname.includes('/ru') === true ? 'категория' : 'category'}`}:{' '}
-                    {category} | {'\xa0'}
-                  </span>
-                </div>
-                <div className='block-article__date'>
-                  {`${location.pathname.includes('/ru') === true ? 'когда' : 'when'}`}:{' '}
-                  {displayedDate.toLowerCase()}
-                </div>
-              </div>
-            </section>
-          </article>
-        </>
-      );
-    }
+            </div>
+          </section>
+        </article>
+      </>
+    );
   } else {
     return (
       <>
@@ -194,7 +161,7 @@ export default function Block() {
                 {'\xa0'}
               </span>{' '}
               <br />
-              <span className='block-article__link skeleton-box' style={{ width: '30%' }}>
+              <span className='block-article__website-link skeleton-box' style={{ width: '30%' }}>
                 {'\xa0'}
               </span>
             </div>

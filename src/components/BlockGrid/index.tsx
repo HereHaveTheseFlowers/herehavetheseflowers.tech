@@ -152,6 +152,7 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
             className='block__thumbnail-image image_state_unloaded'
             src={thumbnailURL}
             alt={`${name} thumbnail`}
+            draggable='false'
             onLoad={() => {
               handleImageLoaded();
             }}
@@ -206,6 +207,7 @@ BlockGrid.Block = function Block(props: BlockPreviewProps) {
             className='block__thumbnail-image image_state_unloaded'
             src={thumbnailURL}
             alt={`${name} thumbnail`}
+            draggable='false'
             onLoad={() => {
               imageSkeletonRef.current.remove();
               imageRef.current.classList.remove('image_state_unloaded');
