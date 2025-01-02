@@ -11,7 +11,7 @@
     min-height: 400px
     flex-basis: calc(33.333% - 21.5px)
     position: relative
-    padding: $margin-small
+    padding:  $margin-small $margin-small $margin-normal $margin-small
     display: flex
     flex-direction: column
     align-items: flex-start
@@ -26,19 +26,17 @@
         content: " "
         position: absolute
         background: $color-main
-        opacity: $opacity-none
+        opacity: .08
         top: 0
         left: 0
         width: 100%
         height: 100%
         z-index: -1
         transition: $transition-color color, $transition-color border-color, 0.2s opacity
-    &:hover::after
-        opacity: 0.08
     &:before
         content: " "
         position: absolute
-        opacity: $opacity-full
+        opacity: 0.5
         top: 0
         left: 0
         width: 100%
@@ -50,6 +48,8 @@
         border-color: $color-main
         transition: $transition-color color, $transition-color border-color, 0.2s opacity, 0.1s border-width ease
         pointer-events: none
+    &:hover:before
+        opacity: $opacity-full
 
 .block__status
     width: 100%
@@ -84,8 +84,8 @@
     pointer-events: none
 
 .block__date
-    cursor: pointer
     margin-left: auto
+    position: relative
     text-align: right
 
 .block__category
@@ -95,7 +95,7 @@
     color: $color-main
     transition: $transition-color color, $transition-color border-color
     border-style: solid
-    border-width: $border-normal
+    border-width: 0
     border-color: $color-main
     border-radius: $border-radius-notification
     overflow: hidden
@@ -108,12 +108,28 @@
         left: 0
         width: 100%
         height: 100%
-        opacity: 0
-        z-index: -1
         background-color: $color-main
+        opacity: 0.2
+        z-index: -1
         transition: $transition-color background-color, 0.2s opacity
+    &:after
+        transition: $transition-color background-color, 0.2s opacity
+        border-color: $color-main
+        border-radius: $border-radius-notification
+        border-width: $border-normal
+        border-style: solid
+        content: " "
+        position: absolute
+        opacity: $opacity-none
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+    &:hover:after
+        opacity: $opacity-full
     &:hover:before
-        opacity: $opacity-smallest
+        background-color: $color-bg
+        opacity: 0.08
 
 .block__category-span
     cursor: pointer

@@ -1,51 +1,56 @@
-<!DOCTYPE html>
-<html lang="en" style="--doc-height: 100vh; --doc-vh: 1vh; --color-bg:#f4f5f5; --color-main: #1e8e42;">
-    <head>
-        <base href="/" />
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!doctype html>
+<html
+  lang="en"
+  style="--doc-height: 100vh; --doc-vh: 1vh; --color-bg: #f4f5f5; --color-main: #1e8e42"
+>
+  <head>
+    <base href="/" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Herehavetheseflowers</title>
+    <title>Herehavetheseflowers</title>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
-        <style>
-            .loader {
-                width: 100%;
-                height: 100%;
-                position: fixed;
-                top: 0;
-                left: 0;
-                background-color: var(--color-bg);
-                display: grid;
-                place-items: center;
-                opacity: 1;
-                transition: opacity 0.2s linear;
-            }
+    <style>
+      .loader {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: var(--color-bg);
+        display: grid;
+        place-items: center;
+        opacity: 1;
+        transition: opacity 0.2s linear;
+      }
 
-            .loader__circle {
-                border-width: 16px;
-                border-style: solid;
-                border-color: var(--color-main);
-                border-top: 16px solid var(--color-bg);
-                border-radius: 50%;
-                width: 140px;
-                height: 140px;
-                animation: spin 1s linear infinite;
-                font-size: 50px;
-            }
+      .loader__circle {
+        border-width: 16px;
+        border-style: solid;
+        border-color: var(--color-main);
+        border-top: 16px solid var(--color-bg);
+        border-radius: 50%;
+        width: 140px;
+        height: 140px;
+        animation: spin 1s linear infinite;
+        font-size: 50px;
+      }
 
-            @keyframes spin {
-                0% {
-                    transform: rotate(0deg);
-                }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
 
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-        </style>
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
 
-        <!-- site description
+    <!-- site description
         <meta name="description" content="">
         <meta name="author" content="">
         <meta property="og:title" content="">
@@ -60,10 +65,9 @@
         <meta property="og:image:width" content="1200"/>
         <meta property="og:image:height" content="630"/>
          -->
-
-    </head>
-    <body>
-        <div class="loader"><span class="loader__circle"></span></div>
-        <div id="root"></div>
-    </body>
+  </head>
+  <body>
+    <div class="loader"><span class="loader__circle"></span></div>
+    <div id="root"></div>
+  </body>
 </html>

@@ -20,24 +20,33 @@ html
     transition: color $transition-color, scrollbar-color $transition-color, background-color $transition-color
     overflow: overlay
 
-*
-    transition: color $transition-color, border-color $transition-color
-
-span
-    color: $color-main
 
 body
     margin: 0 $margin-normal $margin-normal $margin-normal
     padding: 0
     min-height: calc(var(--doc-height) - $margin-normal * 2)
+    text-rendering: optimizeLegibility
 
 .app
     display: flex
     flex-direction: column
     align-items: center
 
+:root
+    font-family: Inter, sans-serif
+    font-feature-settings: 'liga' 1, 'calt' 1
+
+@supports (font-variation-settings: normal)
+    :root
+        font-family: InterVariable, sans-serif
+
+*
+    transition: color $transition-color, border-color $transition-color
+
+span
+    color: $color-main
+
 div#root
-    font-family: 'Gilroy', Helvetica, sans-serif
     -webkit-font-smoothing: antialiased
     font-weight: normal
     font-style: normal

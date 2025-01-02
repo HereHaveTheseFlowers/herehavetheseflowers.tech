@@ -1,6 +1,4 @@
-//import './assets/fonts/fonts.css';
 import './utils/modern-normalize.css';
-import './constants/fonts.css';
 import './styles.sass';
 import 'core-js/stable';
 import React from 'react';
