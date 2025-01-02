@@ -61,6 +61,10 @@
     line-height: 14px
     flex: none
     align-items: center
+    @media screen and (max-width: $breakpoint-phone)
+        //height: calc($font-standard + $margin-petite * 2)
+        font-size: $font-standard
+
 
 .block__notification
     cursor: pointer
@@ -135,6 +139,8 @@
     cursor: pointer
     font-size: $font-small
     line-height: calc($font-small + $margin-little * 2)
+    @media screen and (max-width: $breakpoint-phone)
+        font-size: $font-standard
     
 .block__thumbnail
     margin-top: $margin-petite
@@ -171,7 +177,7 @@
     margin-top: $margin-petite
     flex: none
     font-size: $font-normal
-    font-weight: 600
+    font-weight: 700
     margin-left: $margin-little
     cursor: pointer
 
