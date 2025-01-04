@@ -13,18 +13,10 @@ type NavbarProps = {
 };
 
 export function Navbar(props: NavbarProps) {
-  const [menuActive, setMenuActive] = useState(false);
-  const [paletteActive, setPaletteActive] = useState(false);
-
   const navigate = useNavigate();
 
-  const menuPaletteRef = React.createRef();
-  const menuElementRef = useRef(null);
   const langSwitcherRef = useRef(null);
-
-  const categories = store.getState().categories;
-
-  const isMobile: boolean = window.matchMedia('(max-device-width: 480px)').matches;
+  const isMobile: boolean = window.matchMedia('(max-device-width: 500px)').matches;
 
   const navigateToCategory = () => {
     if (!props.category) return;
@@ -33,33 +25,7 @@ export function Navbar(props: NavbarProps) {
     );
   };
 
-  const handleMenuButton = () => {
-    if (!menuElementRef.current) return;
-    if (menuActive) {
-      menuElementRef.current.classList.add('menu_state_hidden');
-      setMenuActive(false);
-    } else {
-      menuElementRef.current.classList.remove('menu_state_hidden');
-      setMenuActive(true);
-    }
-    document.querySelector('.navbar__menu')?.classList.toggle('active');
-  };
-
-  const handlePaletteButton = () => {
-    if (!menuPaletteRef.current) return;
-    const palette = menuPaletteRef.current as HTMLDivElement;
-    if (paletteActive) {
-      palette.classList.add('palette_state_hidden');
-      setPaletteActive(false);
-    } else {
-      palette.classList.remove('palette_state_hidden');
-      setPaletteActive(true);
-    }
-    document.querySelector('.navbar__palette')?.classList.toggle('active');
-  };
-
   const handleThemeSwitcher = () => {
-    document.querySelector('.themeswitcher__semicircle')?.classList.toggle('active');
     document.querySelector('.themeswitcher')?.classList.toggle('active');
     window.dispatchEvent(new Event('colorchange'));
     if (store.getState().theme === 'dark') {
@@ -108,16 +74,13 @@ export function Navbar(props: NavbarProps) {
         </div>
       )}
       <div className='navbar__buttons'>
-        <button
-          className={`themeswitcher ${store.getState().theme === 'dark' ? 'active' : ''}`}
-          onClick={handleThemeSwitcher}>
-          <div
-            className={`themeswitcher__semicircle ${store.getState().theme === 'dark' ? 'active' : ''}`}
-          />
-        </button>
         <button className='langswitcher' onClick={handleLangSwitcher} ref={langSwitcherRef}>
           <span className='langswitcher__span'>{props.lang === 'ru' ? 'EN' : 'RU'}</span>
         </button>
+
+        <button
+          className={`themeswitcher ${store.getState().theme === 'dark' ? 'active' : ''}`}
+          onClick={handleThemeSwitcher}></button>
       </div>
     </header>
   );

@@ -1,18 +1,18 @@
 .navbar
     width: 100%
     display: flex
-    padding-bottom: $margin-small
-    padding-top: $margin-normal
+    padding: $margin-normal $margin-small 0 $margin-small
     position: relative
     top: 0
     //background-color: $color-bg
     z-index: $z-header
-    border-bottom: $border-normal solid $color-main
+    //border-bottom: $border-normal solid $color-main
     transition: $transition-color border-color, $transition-color background-color
+    align-items: center
 
 .navbar__logo
     font-size: $font-big
-    font-weight: 600
+    font-weight: 400
     cursor: pointer
 
 .navbar__category
@@ -25,132 +25,72 @@
 
 .navbar__buttons
     display: flex
-    align-items: flex-start
     position: absolute
-    right: 0
+    right: $margin-small
     gap: $margin-small
-
-.menu
-    position: fixed
-    display: flex
-    flex-direction: column
     align-items: center
-    justify-content: flex-start
-    gap: $margin-normal
-    padding-top: calc($margin-small + $font-big + $margin-normal + $margin-normal)
-    right: -$border-normal
-    top: 0
-    width: calc(80px * 2 + $margin-normal * 3)
-    height: var(--doc-height)
-    background-color: $color-bg
-    border-left-color: $color-main
-    border-left-width: $border-normal
-    border-left-style: solid
-    z-index: $z-menu
-    transition: $transition-color border-color, $transition-color color, .2s width, .2s opacity, $transition-color background-color
     @media screen and (max-width: $breakpoint-phone)
-        width: 50vw
-
-.menu_state_hidden
-    width: 0
-    opacity: 0
-    pointer-events: none
-
-.menu__category
-    cursor: pointer
-    font-size: $font-normal
-    &:hover
-        transform: scale(2)
-    &_current
-        border-bottom: $border-normal solid $color-main
-
-.menu__category_active
-    transform: scale(2)
-
-.menu__footer
-    margin-top: auto
-    margin-bottom: $margin-normal
-    display: grid
-    grid-template-columns: auto auto
-    grid-template-rows: auto
-    column-gap: $margin-small
-    @media screen and (max-width: $breakpoint-phone)
-        margin-bottom: calc($margin-normal + $margin-small)
-        row-gap: $margin-small
-        column-gap: $margin-small
+        gap: $margin-petite
 
 .langswitcher
     padding: 0
-    width: 30px
-    height: 30px
+    width: 20px
+    height: 20px
+    margin-top: 5px
     cursor: pointer
     border: 0
     background: none
-    border-radius: 50%
     position: relative
     overflow: hidden
     color: $color-main
     transition: $transition-color color, 0.5s transform
-    &::after
-        content: ""
-        border-color: $color-main
-        border-style: solid
-        border-width: $border-normal
-        border-radius: 50%
-        transition: $transition-color border-color
-        outline: none
-        position: absolute
-        width: 100%
-        height: 100%
-        top: 0
-        left: 0
+    @media screen and (max-width: $breakpoint-phone)
+        width: 30px
+        height: 30px
+        margin-top: 0
 
 .langswitcher__span
     display: block
+    font-size: $font-small
+    font-weight: 600
+    @media screen and (max-width: $breakpoint-phone)
+        font-size: $font-standard
 
 .themeswitcher
     padding: 0
-    width: 30px
-    height: 30px
+    width: 20px
+    height: 20px
+    margin-top: 5px
     cursor: pointer
     border: 0
-    background: none
+    background-color: $color-main
     position: relative
     overflow: hidden
-    border-radius: 50%
-    transition: 0.5s transform
+    transition: $transition-color background-color
     justify-self: end
-    &::after
-        content: ""
-        border-color: $color-main
-        border-style: solid
-        border-width: $border-normal
-        border-radius: 50%
-        transition: $transition-color border-color
-        outline: none
-        position: absolute
-        width: 100%
-        height: 100%
-        top: 0
-        left: 0
+    animation:  $transition-color linear .3s themeswitch2
+    @media screen and (max-width: $breakpoint-phone)
+        width: 25px
+        height: 25px
+        margin-top: 0
     &.active
-        transform: rotate(180deg)
-        
-.themeswitcher__semicircle
-    width: 100%
-    height: 50%
-    background-color: $color-main
-    transition: transform $transition-color, background-color $transition-color
-    position: absolute
-    top: 0
-    transform: translate(-19%, 14%) rotate(135deg)
+        animation:  $transition-color linear .3s themeswitch
 
-.themeswitcher__semicircle.active
-    transform: translate(17%, 83.8%) rotate(135deg)
+@keyframes themeswitch
+    0%
+        opacity: $opacity-full
+    50%
+        opacity: $opacity-none
+    100%
+        opacity: $opacity-full
 
-.navbar__menu
-    z-index: $z-icons
-    width: 80px
+@keyframes themeswitch2
+    0%
+        opacity: $opacity-full
+    50%
+        opacity: $opacity-none
+    100%
+        opacity: $opacity-full
 
 .navbar__palette
     z-index: $z-icons
@@ -172,58 +112,3 @@
     height: 100%
     fill: $color-bg
     filter: url(#gooeyness)
-
-.menu-button
-    height: 100%
-    width: 100%
-    display: flex
-
-.menu-button__svg
-    position: absolute
-    width: 100%
-    height: 100%
-
-.menu-button__x
-    transform: scale(0)
-    transition: transform 200ms
-    filter: url(#gooeyness)
-
-.menu-button__burger
-    filter: url(#gooeyness)
-
-.menu-button__line
-    fill: none
-    stroke: $color-bg
-    stroke-width: 6px
-    stroke-linecap: round
-    stroke-linejoin: round
-    transform-origin: 50%
-    transition: transform 600ms 20ms
-
-.menu-button__x-line
-    stroke-width: 5.5px
-
-.active .menu-button__line
-    transition: transform 600ms
-
-.active .menu-button__line_1
-    transform: translateX(30%) translateY(-3%) rotate(-45deg) scale(.7)
-
-.active .menu-button__line_2
-    transform: translateX(-30%) translateY(-3%) rotate(45deg) scale(.7)
-
-.active .menu-button__line_3
-    transform: translateY(0px) rotate(45deg) scale(.7)
-
-.active .menu-button__line_4
-    transform: translateY(0px) rotate(-45deg) scale(.7)
-
-.active .menu-button__line_5
-    transform: translateX(30%) translateY(3%) rotate(45deg) scale(.7)
-
-.active .menu-button__line_6
-    transform: translateX(-30%) translateY(3%) rotate(-45deg) scale(.7)
-
-.active .menu-button__x
-    transition: transform 600ms 100ms
-    transform: scale(1)

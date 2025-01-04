@@ -21,7 +21,7 @@ export default function Block() {
     setImageLoading(false);
   };
 
-  const isMobile: boolean = window.matchMedia('(max-device-width: 480px)').matches;
+  const isMobile: boolean = window.matchMedia('(max-device-width: 500px)').matches;
   const selectedLang = location.pathname.includes('/ru') === true ? 'ru' : 'en';
   useEffect(() => {
     firestoreController.updateBlocks(selectedLang);
