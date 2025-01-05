@@ -50,17 +50,17 @@ export default function Home() {
   const location = useLocation();
   const homeColor = '';
   let { category } = useParams();
-  if (category) category = category.replaceAll('-', ' ');
   const selectedLang = location.pathname.includes('/ru') === true ? 'ru' : 'en';
 
   useEffect(() => {
     colorC.changeColor('#1e8e42');
     firestoreController.updateBlocks(selectedLang);
   }, []);
-
   if (selectedLang === 'ru') {
     category = translateCategory(category);
   }
+  if (category) category = category.replaceAll('-', ' ');
+
   return (
     <>
       <Navbar category={category} lang={selectedLang} />

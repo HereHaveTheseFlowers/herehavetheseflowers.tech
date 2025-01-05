@@ -33,6 +33,7 @@ export default function Block() {
   if (selectedLang === 'ru') {
     category = translateCategory(category);
   }
+  if (category) category = category.replaceAll('-', ' ');
 
   if (currentBlock) {
     const { date, name, thumbnailURL, website, color } = currentBlock;
