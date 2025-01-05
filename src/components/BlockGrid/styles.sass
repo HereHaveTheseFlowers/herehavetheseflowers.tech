@@ -8,10 +8,10 @@
         margin-left: 0
 
 .block
-    min-height: 400px
+    min-height: 380px
     flex-basis: calc(33.333% - 21.5px)
     position: relative
-    padding:  $margin-small $margin-small $margin-normal $margin-small
+    padding:  $margin-small
     display: flex
     flex-direction: column
     align-items: flex-start
@@ -144,12 +144,8 @@
         font-size: $font-standard
     
 .block__thumbnail
-    margin-top: $margin-petite
-    width: 100%
-    padding-bottom: 56.25%
-    height: 0
-    position: relative
-    overflow: hidden
+    margin: $margin-small auto $margin-petite auto
+    width: 80%
     flex: none
     border-radius: $border-radius
     cursor: pointer
@@ -157,14 +153,14 @@
 .block__thumbnail-image
     width: 100%
     height: auto
-    position: absolute
-    top: -50%
-    left: -50%
-    right: -50%
-    bottom: -50%
-    margin: auto
+    aspect-ratio: 18 / 11
     user-select: none
     user-drag: none
+    border-radius: 3px
+    object-fit: cover
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.25))
+    transition: $transition-color opacity
+    opacity: $opacity-none
 
 .block__overlay
     position: absolute
